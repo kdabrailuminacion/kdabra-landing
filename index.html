@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,727 +10,729 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --btn-brown: #63400A;
-            --btn-brown-hover: #27f5be;
-            --app-gradient: linear-gradient(90deg,#FFB84D,#27f5be);
-            --white: #ffffff;
-        }
+             :root {
+                 --btn-brown: #63400A;
+                 --btn-brown-hover: #27f5be;
+                 --app-gradient: linear-gradient(90deg,#FFB84D,#27f5be);
+                 --white: #ffffff;
+             }
 
-        html, body {
-            scroll-snap-type: y mandatory;
-            height: 100%;
-            overflow-x: hidden;
-            margin: 0;
-            font-family: Arial, Arial, Arial;
-            color: var(--white);
-            background: #111;
-        }
+             html, body {
+                 scroll-snap-type: y mandatory;
+                 height: 100%;
+                 overflow-x: hidden;
+                 margin: 0;
+                 font-family: Arial, Arial, Arial;
+                 color: var(--white);
+                 background: #111;
+             }
 
-         /* Scroll fullpages */
-        .page-wrap {
-            height: auto;
-        }
+             /* Scroll fullpages */
+             .page-wrap {
+                 height: auto;
+             }
 
-         section.full {
-             min-height: 100vh;
-             scroll-snap-align: start;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             position: relative;
-         }
-
-         /* Fondo base para todas las secciones */
-         section.full {
-             background-color: ;
-         }
-
-         /* Background images per section */
-        .s1 {
-            min-height: 100vh; /* fuerza altura completa */
-            display: flex;
-            position: relative;
-            background-image: url('images/page1.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: contain;
-        }
-
-         .s2 {
-             background-image: url('images/page2.jpg');
-             background-repeat: no-repeat;
-             background-position: center center;
-             background-size: contain;
-         }
-
-         .s3 {
-             background-image: url('images/page3.jpg');
-             background-repeat: no-repeat;
-             background-position: center center;
-             background-size: contain;
-         }
-
-         .s4 {
-             background-image: url('images/page4.jpg');
-             background-repeat: no-repeat;
-             background-position: center center;
-             background-size: contain;
-         }
-
-         /* Overlay */
-        .overlay {
-            position: absolute;
-            inset: 0;
-            display: none;
-            pointer-events: none;
-        }
-
-         /* Container */
-         .container {
-             width: 100%;
-             max-width: 1200px;
-             padding: 40px;
-             box-sizing: border-box;
-             position: relative;
-             z-index: 3;
-         }
-
-        
-
-         /* ---------------------------------
-        LEFT 4 BUTTONS — SOLO EN PAGE 1
-        --------------------------------- */
-
-         /* Aparecen solo en la sección 1 */
-        /* ---------- CONTROL DE VISIBILIDAD (botones fijos) ---------- */
-
-        /* contenedor fijo (posición y estética) - siempre fixed para estabilidad */
-        .left-buttons {
-            position: fixed;
-            left: 120px;
-            top: 80%;
-            transform: translateY(-50%) translateY(-8px); /* empezamos levemente desplazados */
-            display: grid;
-            grid-template-columns: repeat(2, auto);
-            grid-template-rows: repeat(2, auto);
-            gap: 3px;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .22s ease, transform .18s ease;
-        }
-
-            /* estilo de los <a> (sin cambios funcionales) */
-            .left-buttons a {
-                display: inline-block;
-                padding: 13px 20px;
-                background: conic-gradient(30deg, #27f5be, #27f5be);
-                color: var(--white);
-                border-radius: 4px;
-                text-decoration: none;
-                font-size: 22px;
-                font-weight: 600;
-                transition: background-color .18s ease, transform .08s ease;
-                box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-            }
-
-                .left-buttons a:hover {
-                    background: var(--btn-brown-hover);
-                    color: #000;
-                    transform: translateY(-2px);
-                }
-
-        /* boton de descarga bottom-right (fixed pero oculto por defecto) */
-        .app-download {
-            position: fixed;
-            right: 11%;
-            bottom: 5%;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .22s ease, transform .18s ease;
-            transform: translateY(8px);
-        }
-
-            .app-download .btn {
-                padding: 10px 20px;
-                border-radius: 4px;
-                color: #000; /* ← texto blanco */
-                background: linear-gradient(30deg, #27f5be, #057054); /* ← nuevo fondo */
-                font-size: 25px;
-                text-decoration: none;
-                transition: background-color .18s ease, transform .08s ease; /* mismo efecto */
-                box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-            }
-
-                .app-download .btn:hover {
-                    filter: brightness(.95);
-                    transform: translateY(-2px);
-                }
-            .app-download .text {
-                font-size: 22px; /* ajustá acá el tamaño */
-                color: #057054; /* o el color que quieras */
-                text-shadow: 0 0 15px #27f5be;
-                margin-top: 4px;
-                text-align: center;
-            }
-
-
-        /* cuando añadamos la clase .visible, aparecen y quedan en su lugar */
-        .left-buttons.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(-50%) translateY(0);
-        }
-
-        .app-download.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        
-
-         /* ---------------------------------
-        SECTION 2 — MODELOS
-        --------------------------------- */
-        #slot-luna,
-        #slot-sol,
-        #slot-melissa {
-            position: absolute; /* ← hace que puedas moverlos donde quieras */
-            z-index: 10;
-        }
-
-        #slot-luna {
-            top: 65px;
-            left: 0%;
-        }
-
-        #slot-sol {
-            top: 65px;
-            left: 39%;
-        }
-
-        #slot-melissa {
-            top: 65px;
-            left: 78%;
-            position: absolute;
-        }
-
-            /* Texto "PROXIMAMENTE" */
-            #slot-melissa .coming {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: #057054;
-                font-size: 26px;
-                font-weight: 900;
-                text-shadow: 0 0 20px #27f5be;
-                background: none;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity .25s ease;
-            }
-
-            /* Mostrar al pasar el cursor */
-            #slot-melissa:hover .coming {
-                opacity: 1;
-            }
-
-        /* LIGHTBOX GENERAL */
-        #lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(4px);
-            z-index: 999999;
-        }
-
-            #lightbox.hidden {
-                display: none;
-            }
-
-            #lightbox img {
-                max-width: 90%;
-                max-height: 90%;
-                border-radius: 8px;
-                cursor: pointer;
-            }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 48px;
-            color: white;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .models-row {
-            width: 80%;
-            max-width: 900px;
-            margin-left: 5%; /* queda pegado a la izquierda */
-            margin-right: auto;
-            position: relative; /* ahora sirve como “escenario” */
-            height: 500px;
-            gap: 26px;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 40px 24px;
-            box-sizing: border-box;
-        }
-
-        .model-slot {
-            width: 35%;
-            aspect-ratio: 9 / 14; /* ← ESTO los hace cuadrados */
-            background: rgba(255,255,255,0.06);
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-             .model-slot.empty {
+             section.full {
+                 min-height: 100vh;
+                 scroll-snap-align: start;
                  display: flex;
                  align-items: center;
                  justify-content: center;
-                 color: rgba(255,255,255,0.7);
-                 font-weight: 700;
-                 font-size: 20px;
-             }
-
-         /* ---------------------------------
-        SECTION 3 — APP / FORM
-        --------------------------------- */
-        #google-doc-container {
-            position: absolute;
-            top: -110px;
-            left: 675px; /* ahora sí responde */
-            z-index: 50;
-            cursor: move;
-        }
-
-
-         .page3-inner {
-             display: flex;
-             gap: 40px;
-             align-items: start;
-             justify-content: center;
-             padding: 40px;
-             box-sizing: border-box;
-         }
-
-        .slot-gestual {
-            width: 27%;
-            aspect-ratio: 9 / 14;
-            background: rgba(255,255,255,0.06);
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,.15);
-        }
-
-         .slot-form {
-             width: 470px;
-             height: 500px;
-             background: rgba(255,255,255,0.03);
-             border-radius: 5px;
-             padding: 10px;
-             box-sizing: border-box;
-             overflow: auto;
-         }
-
-        #slot-form iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-         /* ---------------------------------
-        CAROUSEL
-        --------------------------------- */
-
-        .carousel {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: transparent; /* <- importante: quitar el #111 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-             .carousel .slides {
                  position: relative;
-                 width: 100%;
-                 height: 100%;
              }
 
-             .carousel img, .carousel video {
+             /* Fondo base para todas las secciones */
+             section.full {
+                 background-color:;
+             }
+
+             /* Background images per section */
+             .s1 {
+                 min-height: 100vh; /* fuerza altura completa */
+                 display: flex;
+                 position: relative;
+                 background-image: url('images/page1.jpg');
+                 background-repeat: no-repeat;
+                 background-position: center center;
+                 background-size: contain;
+             }
+
+             .s2 {
+                 background-image: url('images/page2.jpg');
+                 background-repeat: no-repeat;
+                 background-position: center center;
+                 background-size: contain;
+             }
+
+             .s3 {
+                 background-image: url('images/page3.jpg');
+                 background-repeat: no-repeat;
+                 background-position: center center;
+                 background-size: contain;
+             }
+
+             .s4 {
+                 background-image: url('images/page4.jpg');
+                 background-repeat: no-repeat;
+                 background-position: center center;
+                 background-size: contain;
+             }
+
+             /* Overlay */
+             .overlay {
                  position: absolute;
                  inset: 0;
+                 display: none;
+                 pointer-events: none;
+             }
+
+             /* Container */
+             .container {
+                 width: 100%;
+                 max-width: 1200px;
+                 padding: 40px;
+                 box-sizing: border-box;
+                 position: relative;
+                 z-index: 3;
+             }
+
+
+
+             /* ---------------------------------
+             LEFT 4 BUTTONS — SOLO EN PAGE 1
+             --------------------------------- */
+
+             /* Aparecen solo en la sección 1 */
+             /* ---------- CONTROL DE VISIBILIDAD (botones fijos) ---------- */
+
+             /* contenedor fijo (posición y estética) - siempre fixed para estabilidad */
+             .left-buttons {
+                 position: fixed;
+                 left: 120px;
+                 top: 80%;
+                 transform: translateY(-50%) translateY(-8px); /* empezamos levemente desplazados */
+                 display: grid;
+                 grid-template-columns: repeat(2, auto);
+                 grid-template-rows: repeat(2, auto);
+                 gap: 3px;
+                 z-index: 9999;
+                 opacity: 0;
+                 pointer-events: none;
+                 transition: opacity .22s ease, transform .18s ease;
+             }
+
+                 /* estilo de los <a> (sin cambios funcionales) */
+                 .left-buttons a {
+                     display: inline-block;
+                     padding: 13px 20px;
+                     background: conic-gradient(30deg, #27f5be, #27f5be);
+                     color: var(--white);
+                     border-radius: 4px;
+                     text-decoration: none;
+                     font-size: 22px;
+                     font-weight: 600;
+                     transition: background-color .18s ease, transform .08s ease;
+                     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+                 }
+
+                     .left-buttons a:hover {
+                         background: var(--btn-brown-hover);
+                         color: #000;
+                         transform: translateY(-2px);
+                     }
+
+             /* boton de descarga bottom-right (fixed pero oculto por defecto) */
+             .app-download {
+                 position: fixed;
+                 right: 11%;
+                 bottom: 5%;
+                 z-index: 9999;
+                 opacity: 0;
+                 pointer-events: none;
+                 transition: opacity .22s ease, transform .18s ease;
+                 transform: translateY(8px);
+             }
+
+                 .app-download .btn {
+                     padding: 10px 20px;
+                     border-radius: 4px;
+                     color: #000; /* ← texto blanco */
+                     background: linear-gradient(30deg, #27f5be, #057054); /* ← nuevo fondo */
+                     font-size: 25px;
+                     text-decoration: none;
+                     transition: background-color .18s ease, transform .08s ease; /* mismo efecto */
+                     box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+                 }
+
+                     .app-download .btn:hover {
+                         filter: brightness(.95);
+                         transform: translateY(-2px);
+                     }
+
+                 .app-download .text {
+                     font-size: 22px; /* ajustá acá el tamaño */
+                     color: #057054; /* o el color que quieras */
+                     text-shadow: 0 0 15px #27f5be;
+                     margin-top: 4px;
+                     text-align: center;
+                 }
+
+
+             /* cuando añadamos la clase .visible, aparecen y quedan en su lugar */
+             .left-buttons.visible {
+                 opacity: 1;
+                 pointer-events: auto;
+                 transform: translateY(-50%) translateY(0);
+             }
+
+             .app-download.visible {
+                 opacity: 1;
+                 pointer-events: auto;
+                 transform: translateY(0);
+             }
+
+
+
+             /* ---------------------------------
+             SECTION 2 — MODELOS
+             --------------------------------- */
+             #slot-luna,
+             #slot-sol,
+             #slot-melissa {
+                 position: absolute; /* ← hace que puedas moverlos donde quieras */
+                 z-index: 10;
+             }
+
+             #slot-luna {
+                 top: 65px;
+                 left: 0%;
+             }
+
+             #slot-sol {
+                 top: 65px;
+                 left: 39%;
+             }
+
+             #slot-melissa {
+                 top: 65px;
+                 left: 78%;
+                 position: absolute;
+             }
+
+                 /* Texto "PROXIMAMENTE" */
+                 #slot-melissa .coming {
+                     position: absolute;
+                     top: 50%;
+                     left: 50%;
+                     transform: translate(-50%, -50%);
+                     color: #057054;
+                     font-size: 26px;
+                     font-weight: 900;
+                     text-shadow: 0 0 20px #27f5be;
+                     background: none;
+                     opacity: 0;
+                     pointer-events: none;
+                     transition: opacity .25s ease;
+                 }
+
+                 /* Mostrar al pasar el cursor */
+                 #slot-melissa:hover .coming {
+                     opacity: 1;
+                 }
+
+             /* LIGHTBOX GENERAL */
+             #lightbox {
+                 position: fixed;
+                 top: 0;
+                 left: 0;
                  width: 100%;
                  height: 100%;
-                 object-fit: cover;
-                 opacity: 0;
-                 transition: opacity .25s ease, transform .25s ease;
+                 background: rgba(0,0,0,0.85);
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                 backdrop-filter: blur(4px);
+                 z-index: 999999;
              }
 
-                 .carousel img.active, .carousel video.active {
-                     opacity: 1;
-                     transform: scale(1);
+                 #lightbox.hidden {
+                     display: none;
                  }
 
-             .carousel:hover img.active, .carousel:hover video.active {
-                 transform: scale(1.02);
-             }
+                 #lightbox img {
+                     max-width: 90%;
+                     max-height: 90%;
+                     border-radius: 8px;
+                     cursor: pointer;
+                 }
 
-         .dots {
-             position: absolute;
-             bottom: 10px;
-             left: 50%;
-             transform: translateX(-50%);
-             display: flex;
-             gap: 8px;
-             z-index: 10;
-         }
-
-             .dots .dot {
-                 width: 10px;
-                 height: 10px;
-                 border-radius: 50%;
-                 background: rgba(255,255,255,.6);
+             .lightbox-close {
+                 position: absolute;
+                 top: 20px;
+                 right: 25px;
+                 font-size: 48px;
+                 color: white;
                  cursor: pointer;
-                 transition: transform .12s;
+                 user-select: none;
              }
 
-                 .dots .dot.active {
-                     background: #fff;
-                     transform: scale(1.15);
-                 }
-
-         /* ---------------------------------
-        RESPONSIVE
-        --------------------------------- */
-
-         @media(max-width:1200px) {
              .models-row {
-                 gap: 20px;
-                 padding: 30px;
-                 transform: scale(.95);
+                 width: 80%;
+                 max-width: 900px;
+                 margin-left: 5%; /* queda pegado a la izquierda */
+                 margin-right: auto;
+                 position: relative; /* ahora sirve como “escenario” */
+                 height: 500px;
+                 gap: 26px;
+                 justify-content: center;
+                 align-items: flex-start;
+                 padding: 40px 24px;
+                 box-sizing: border-box;
              }
 
              .model-slot {
-                 width: 330px;
-                 height: 316px;
+                 width: 35%;
+                 aspect-ratio: 9 / 14; /* ← ESTO los hace cuadrados */
+                 background: rgba(255,255,255,0.06);
+                 border-radius: 5px;
+                 overflow: hidden;
+                 position: relative;
+                 box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+             }
+
+                 .model-slot.empty {
+                     display: flex;
+                     align-items: center;
+                     justify-content: center;
+                     color: rgba(255,255,255,0.7);
+                     font-weight: 700;
+                     font-size: 20px;
+                 }
+
+             /* ---------------------------------
+             SECTION 3 — APP / FORM
+             --------------------------------- */
+             #google-doc-container {
+                 position: absolute;
+                 top: -110px;
+                 left: 675px; /* ahora sí responde */
+                 z-index: 50;
+                 cursor: move;
+             }
+
+
+             .page3-inner {
+                 display: flex;
+                 gap: 40px;
+                 align-items: start;
+                 justify-content: center;
+                 padding: 40px;
+                 box-sizing: border-box;
              }
 
              .slot-gestual {
-                 width: 330px;
-                 height: 316px;
+                 width: 27%;
+                 aspect-ratio: 9 / 14;
+                 background: rgba(255,255,255,0.06);
+                 border-radius: 5px;
+                 overflow: hidden;
+                 box-shadow: 0 8px 20px rgba(0,0,0,.15);
              }
 
              .slot-form {
-                 width: 180px;
-                 height: 275px;
+                 width: 470px;
+                 height: 500px;
+                 background: rgba(255,255,255,0.03);
+                 border-radius: 5px;
+                 padding: 10px;
+                 box-sizing: border-box;
+                 overflow: auto;
              }
-         }
 
-         @media(max-width:780px) {
-             .left-buttons {
+             #slot-form iframe {
+                 width: 100%;
+                 height: 100%;
+                 border: none;
+             }
+             /* ---------------------------------
+             CAROUSEL
+             --------------------------------- */
+
+             .carousel {
+                 position: relative;
+                 width: 100%;
+                 height: 100%;
+                 background: transparent; /* <- importante: quitar el #111 */
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+             }
+
+                 .carousel .slides {
+                     position: relative;
+                     width: 100%;
+                     height: 100%;
+                 }
+
+                 .carousel img, .carousel video {
+                     position: absolute;
+                     inset: 0;
+                     width: 100%;
+                     height: 100%;
+                     object-fit: cover;
+                     opacity: 0;
+                     transition: opacity .25s ease, transform .25s ease;
+                 }
+
+                     .carousel img.active, .carousel video.active {
+                         opacity: 1;
+                         transform: scale(1);
+                     }
+
+                 .carousel:hover img.active, .carousel:hover video.active {
+                     transform: scale(1.02);
+                 }
+
+             .dots {
+                 position: absolute;
+                 bottom: 10px;
+                 left: 50%;
+                 transform: translateX(-50%);
+                 display: flex;
+                 gap: 8px;
+                 z-index: 10;
+             }
+
+                 .dots .dot {
+                     width: 10px;
+                     height: 10px;
+                     border-radius: 50%;
+                     background: rgba(255,255,255,.6);
+                     cursor: pointer;
+                     transition: transform .12s;
+                 }
+
+                     .dots .dot.active {
+                         background: #fff;
+                         transform: scale(1.15);
+                     }
+
+             /* ---------------------------------
+             RESPONSIVE
+             --------------------------------- */
+
+             @media(max-width:1200px) {
+                 .models-row {
+                     gap: 20px;
+                     padding: 30px;
+                     transform: scale(.95);
+                 }
+
+                 .model-slot {
+                     width: 330px;
+                     height: 316px;
+                 }
+
+                 .slot-gestual {
+                     width: 330px;
+                     height: 316px;
+                 }
+
+                 .slot-form {
+                     width: 180px;
+                     height: 275px;
+                 }
+             }
+
+             @media(max-width:780px) {
+                 .left-buttons {
+                     display: none;
+                 }
+
+                 .models-row {
+                     flex-direction: column;
+                     align-items: center;
+                     transform: none;
+                 }
+
+                 .model-slot {
+                     width: 86%;
+                     height: auto;
+                     aspect-ratio: 9/16;
+                 }
+
+                 .page3-inner {
+                     flex-direction: column;
+                     gap: 18px;
+                     padding: 18px;
+                     align-items: center;
+                 }
+
+                 .slot-gestual, .slot-form {
+                     width: 50%;
+                     height: auto;
+                     aspect-ratio: 9/16;
+                 }
+             }
+
+             .anchor-target {
+                 scroll-margin-top: 30px;
+             }
+
+             .mobile-carousel-wrapper {
                  display: none;
              }
 
-             .models-row {
-                 flex-direction: column;
-                 align-items: center;
-                 transform: none;
+             /* mover el slot de formulario manualmente */
+             .draggable {
+                 position: absolute;
+                 top: -15px;
+                 left: 1300px;
+                 cursor: move;
+                 z-index: 9999;
              }
-
-             .model-slot {
-                 width: 86%;
-                 height: auto;
-                 aspect-ratio: 9/16;
+             /* mover el slot de carrusel gestual manualmente */
+             .slot-gestual.draggable {
+                 position: absolute;
+                 top: -130px; /* posición inicial */
+                 left: 75px;
+                 cursor: move;
+                 z-index: 9999;
              }
+             /* ===============================
+        MOBILE 9:16 (solo celulares)
+        =============================== */
+             @media (max-width: 780px) {
 
-             .page3-inner {
-                 flex-direction: column;
-                 gap: 18px;
-                 padding: 18px;
-                 align-items: center;
+                 /* ===== FONDOS MOBILE ===== */
+                 .s1 {
+                     background-image: url('images/page1-mobile.jpg');
+                 }
+
+                 .s2 {
+                     background-image: url('images/page2-mobile.jpg');
+                 }
+
+                 .s3 {
+                     background-image: url('images/page3-mobile.jpg');
+                 }
+
+                 .s4 {
+                     background-image: url('images/page4-mobile.jpg');
+                 }
+
+                 section.full {
+                     background-size: cover;
+                     background-position: center top;
+                 }
+
+                 #page2 {
+                     align-items: flex-start;
+                 }
+                 /* ===== PAGE 1 — BOTONES =====📌 Cómo lo ajustás vos Subir / bajar botones → top Separación → gap Tamaño → font-size, padding */
+                 .left-buttons {
+                     position: absolute;
+                     top: 72%;
+                     left: 20%;
+                     transform: translateX(-50%);
+                     display: flex;
+                     flex-direction: column;
+                     gap: 5px;
+                     /* estado oculto por defecto */
+                     opacity: 0;
+                     pointer-events: none;
+                 }
+
+                     .left-buttons.visible {
+                         opacity: 1;
+                         pointer-events: auto;
+                     }
+
+                     .left-buttons a {
+                         font-size: 16px;
+                         padding: 10px 30px;
+                         background: #27f5be;
+                         color: #000;
+                         border: 1px solid rgba(255,255,255,.5);
+                     }
+
+                         .left-buttons a:active {
+                             background: #27f5be;
+                             color: #000;
+                         }
+
+                         .left-buttons a:nth-child(4) {
+                             display: none;
+                         }
+
+                 /* ===== DESCARGA APP ===== */
+                 .app-download {
+                     position: absolute;
+                     bottom: 8%;
+                     left: 24%;
+                     text-align: left;
+                     /* oculto por defecto */
+                     opacity: 0;
+                     pointer-events: none;
+                 }
+
+                 app-download.visible {
+                     opacity: 1;
+                     pointer-events: auto;
+                 }
+
+                 .app-download .btn {
+                     font-size: 14px;
+                     padding: 8px 16px;
+                 }
+
+                 .app-download .text {
+                     font-size: 16px;
+                     position: absolute;
+                     top: 83%;
+                     left: 1%;
+                 }
+                 /* ===== PAGE 2 — CARRUSELES ===== */
+                 .mobile-carousel-wrapper {
+                     display: block;
+                 }
+
+                 .models-row {
+                     display: none !important;
+                 }
+
+                 /* CONTENEDOR PRINCIPAL (editable) */
+                 .mobile-carousel-wrapper {
+                     position: absolute;
+                     top: 140px; /* ⬅ mover vertical */
+                     left: 0;
+                     width: 100%;
+                     height: 65vh; /* ⬅ tamaño general */
+                     z-index: 30;
+                     background: transparent;
+                 }
+
+                 .mobile-carousel-track {
+                     display: flex;
+                     gap: 5px;
+                     height: 100%;
+                     overflow-x: auto;
+                     scroll-snap-type: x mandatory;
+                     padding: 0 16px;
+                 }
+
+
+                 .mobile-item {
+                     min-width: 75%; /* ⬅ ancho de cada carrusel */
+                     height: 100%;
+                     scroll-snap-align: center;
+                     position: relative;
+                 }
+
+                 .mini-carousel {
+                     width: 100%;
+                     height: 100%;
+                     border-radius: 10px;
+                     overflow: hidden;
+                     position: relative;
+                 }
+
+                     .mini-carousel img {
+                         position: absolute;
+                         inset: 0;
+                         width: 100%;
+                         height: 100%;
+                         object-fit: cover;
+                         opacity: 0;
+                         transition: opacity .3s ease;
+                     }
+
+                         .mini-carousel img.active {
+                             opacity: 1;
+                         }
+
+                 /* NOMBRE + HALO */
+                 .mobile-label {
+                     font-size: 35px;
+                     position: absolute;
+                     bottom: 20px;
+                     left: 50%;
+                     transform: translateX(-50%);
+                     color: #fff;
+                     font-weight: 700;
+                     letter-spacing: 1px;
+                     text-shadow: 0 0 20px rgba(0,0,0,.9);
+                     pointer-events: none;
+                 }
+
+                 .coming-mobile {
+                     position: absolute;
+                     top: 80%;
+                     left: 50%;
+                     transform: translate(-50%, -50%);
+                     color: #057054;
+                     font-size: 28px;
+                     font-weight: 900;
+                     text-shadow: 0 0 20px #27f5be;
+                     opacity: 0;
+                     pointer-events: none;
+                     transition: opacity .4s ease;
+                     z-index: 5;
+                 }
+
+                     .coming-mobile.visible {
+                         opacity: 1;
+                     }
+
+                 .model-slot {
+                     width: 10%;
+                     aspect-ratio: 9 / 16;
+                 }
+
+                 #slot-luna,
+                 #slot-sol,
+                 #slot-melissa {
+                     position: absolute;
+                 }
+
+                 /* POSICIONES MOBILE – ajustables */
+                 #slot-luna {
+                     top: -80px;
+                     left: -20%;
+                     width: 80%;
+                 }
+
+                 #slot-sol {
+                     top: -80px;
+                     left: 60%;
+                     width: 80%;
+                 }
+
+                 #slot-melissa {
+                     top: 10px;
+                     left: 10%;
+                     width: 80%;
+                 }
+                 /* ===== PAGE 3 — GESTUAL ===== */
+                 .slot-gestual {
+                     position: absolute;
+                     top: 360px;
+                     left: 1%;
+                     width: 40%;
+                     aspect-ratio: 9 / 16;
+                 }
+
+                 #slot-gestual {
+                     display: none !important;
+                 }
+                 /* ===== FORMULARIO ===== */
+                 #google-doc-container {
+                     top: -240px; /* ⬅ mover vertical */
+                     left: 1%;
+                     width: 190%; /* ⬅ ancho */
+                     height: 55vh; /* ⬅ alto */
+                 }
              }
-
-            .slot-gestual, .slot-form {
-                width: 50%;
-                height: auto;
-                aspect-ratio: 9/16;
-            }
-         }
-
-         .anchor-target {
-             scroll-margin-top: 30px;
-         }
-
-        .mobile-carousel-wrapper {
-            display: none;
-        }
-
-        /* mover el slot de formulario manualmente */
-        .draggable {
-            position: absolute;
-            top: -15px;
-            left: 1300px;
-            cursor: move;
-            z-index: 9999;
-        }
-        /* mover el slot de carrusel gestual manualmente */
-        .slot-gestual.draggable {
-            position: absolute;
-            top: -130px; /* posición inicial */
-            left: 75px;
-            cursor: move;
-            z-index: 9999;
-        }
-        /* ===============================
-   MOBILE 9:16 (solo celulares)
-   =============================== */
-        @media (max-width: 780px) {
-
-            /* ===== FONDOS MOBILE ===== */
-            .s1 {
-                background-image: url('images/page1-mobile.jpg');
-            }
-
-            .s2 {
-                background-image: url('images/page2-mobile.jpg');
-            }
-
-            .s3 {
-                background-image: url('images/page3-mobile.jpg');
-            }
-
-            .s4 {
-                background-image: url('images/page4-mobile.jpg');
-            }
-
-            section.full {
-                background-size: cover;
-                background-position: center top;
-            }
-
-            #page2 {
-                align-items: flex-start;
-            }
-            /* ===== PAGE 1 — BOTONES =====📌 Cómo lo ajustás vos Subir / bajar botones → top Separación → gap Tamaño → font-size, padding */
-            .left-buttons {
-                position: absolute;
-                top: 72%;
-                left: 20%;
-                transform: translateX(-50%);
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                /* estado oculto por defecto */
-                opacity: 0;
-                pointer-events: none;
-            }
-
-                .left-buttons.visible {
-                    opacity: 1;
-                    pointer-events: auto;
-                }
-
-                .left-buttons a {
-                    font-size: 18px;
-                    padding: 14px 44px;
-                    background: #27f5be;
-                    color: #000;
-                    border: 1px solid rgba(255,255,255,.5);
-                }
-
-                    .left-buttons a:active {
-                        background: #27f5be;
-                        color: #000;
-                    }
-                    .left-buttons a:nth-child(4) {
-                        display: none;
-                    }
-
-            /* ===== DESCARGA APP ===== */
-            .app-download {
-                position: absolute;
-                bottom: 8%;
-                left: 24%;
-                text-align: left;
-                /* oculto por defecto */
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            app-download.visible {
-                opacity: 1;
-                pointer-events: auto;
-            }
-
-            .app-download .btn {
-                font-size: 20px;
-                padding: 12px 22px;
-            }
-
-            .app-download .text {
-                font-size: 18px;
-                position: absolute;
-                top: 83%;
-                left: 1%;
-            }
-            /* ===== PAGE 2 — CARRUSELES ===== */
-            .mobile-carousel-wrapper {
-                display: block;
-            }
-            .models-row {
-                display: none !important;
-            }
-
-            /* CONTENEDOR PRINCIPAL (editable) */
-            .mobile-carousel-wrapper {
-                position: absolute;
-                top: 140px; /* ⬅ mover vertical */
-                left: 0;
-                width: 100%;
-                height: 65vh; /* ⬅ tamaño general */
-                z-index: 30;
-                background: transparent;
-            }
-
-            .mobile-carousel-track {
-                display: flex;
-                gap: 5px;
-                height: 100%;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                padding: 0 16px;
-            }
-
-            
-            .mobile-item {
-                min-width: 75%; /* ⬅ ancho de cada carrusel */
-                height: 100%;
-                scroll-snap-align: center;
-                position: relative;
-            }
-
-            .mini-carousel {
-                width: 100%;
-                height: 100%;
-                border-radius: 10px;
-                overflow: hidden;
-                position: relative;
-            }
-
-                .mini-carousel img {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    opacity: 0;
-                    transition: opacity .3s ease;
-                }
-
-                    .mini-carousel img.active {
-                        opacity: 1;
-                    }
-
-            /* NOMBRE + HALO */
-            .mobile-label {
-                font-size: 35px;
-                position: absolute;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                color: #fff;
-                font-weight: 700;
-                letter-spacing: 1px;
-                text-shadow: 0 0 20px rgba(0,0,0,.9);
-                pointer-events: none;
-            }
-            .coming-mobile {
-                position: absolute;
-                top: 80%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: #057054;
-                font-size: 28px;
-                font-weight: 900;
-                text-shadow: 0 0 20px #27f5be;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity .4s ease;
-                z-index: 5;
-            }
-
-                .coming-mobile.visible {
-                    opacity: 1;
-                }
-            .model-slot {
-                width: 10%;
-                aspect-ratio: 9 / 16;
-            }
-
-            #slot-luna,
-            #slot-sol,
-            #slot-melissa {
-                position: absolute;
-            }
-
-            /* POSICIONES MOBILE – ajustables */
-            #slot-luna {
-                top: -80px;
-                left: -20%;
-                width: 80%;
-            }
-
-            #slot-sol {
-                top: -80px;
-                left: 60%;
-                width: 80%;
-            }
-
-            #slot-melissa {
-                top: 10px;
-                left: 10%;
-                width: 80%;
-            }
-            /* ===== PAGE 3 — GESTUAL ===== */
-            .slot-gestual {
-                position: absolute;
-                top: 360px;
-                left: 1%;
-                width: 40%;
-                aspect-ratio: 9 / 16;
-            }
-            #slot-gestual {
-                display: none !important;
-            }
-            /* ===== FORMULARIO ===== */
-            #google-doc-container {
-                top: -240px; /* ⬅ mover vertical */
-                left: 1%;
-                width: 190%; /* ⬅ ancho */
-                height: 65vh; /* ⬅ alto */
-            }
-        }
-
-          
-        
-
     </style>
 
 </head>
@@ -938,7 +941,7 @@
 
     </div> <!-- /page-wrap -->
     <!-- SCRIPTS: carrusel genérico -->
-    
+
     <script>
         /* Carrusel unificado: auto-advance, hover start/stop, click para next, y dots */
         (function () {
@@ -1185,6 +1188,5 @@
 
 </body>
 </html>
-
 
 
