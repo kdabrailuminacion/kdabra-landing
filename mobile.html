@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>K'dabra — Landing</title>
+
+    <!-- Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&family=Cinzel:wght@400&family=Arimo:wght@400&display=swap" rel="stylesheet">
+
+    
+
+    <style>
+        :root {
+            --btn-brown: #63400A;
+            --btn-brown-hover: #27f5be;
+            --app-gradient: linear-gradient(90deg,#FFB84D,#27f5be);
+            --white: #ffffff;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            font-family: Arial, Arial, Arial;
+            color: var(--white);
+            background: #111;
+        }
+
+        /* Scroll fullpages */
+        .page-wrap {
+            height: auto;
+        }
+
+        section.full {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Fondo base para todas las secciones */
+        section.full {
+            background-color:;
+        }
+
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+            #lightbox.hidden {
+                display: none;
+            }
+
+            #lightbox img {
+                max-width: 95%;
+                max-height: 95%;
+                object-fit: contain;
+            }
+
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 32px;
+            color: white;
+        }
+
+
+
+        /* ===============================
+        MOBILE 9:16 (solo celulares)
+        =============================== */
+        @media (max-width: 780px) {
+
+            .hero-text {
+                position: absolute;
+                top: 15%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 85%;
+                text-align: center;
+                color: #000;
+            }
+
+            .hero-title {
+                font-family: 'Astron' !important;
+                font-size: 50px;
+                margin: 0;
+            }
+
+            .hero-subtitle {
+                font-family: 'Poppins', sans-serif;
+                font-size: 26px;
+                margin: 4px 0 0 0;
+            }
+
+            .hero-claim {
+                font-family: 'Cinzel', serif;
+                font-size: 30px;
+                margin: 10px 0 0 0;
+            }
+
+            .hero-description {
+                font-family: 'Arimo', sans-serif;
+                font-size: 16px;
+                margin-top: 8px;
+                line-height: 1.4;
+            }
+
+
+            /* ===== FONDOS MOBILE ===== */
+            .s1 {
+                background-image: url('images/page1-mobile.jpg');
+            }
+
+            .s2 {
+                background-image: url('images/page2-mobile.jpg');
+            }
+
+            .s3 {
+                background-image: url('images/page3-mobile.jpg');
+            }
+
+            .s4 {
+                background-image: url('images/page4-mobile.jpg');
+            }
+
+            section.full {
+                background-size: cover;
+                background-position: center top;
+            }
+
+            #page2 {
+                display: block;
+                min-height: 100vh;
+                padding-top: 50px;
+            }
+            /* ===== PAGE 1 — BOTONES =====📌 Cómo lo ajustás vos Subir / bajar botones → top Separación → gap Tamaño → font-size, padding */
+            .left-buttons {
+                position: fixed;
+                z-index: 9999;
+                top: 70%;
+                left: 20%;
+                transform: none;
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+                /* estado oculto por defecto */
+                opacity: 0;
+                pointer-events: none;
+            }
+
+                .left-buttons.visible {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
+                .left-buttons a {
+                    text-align: center;
+                    line-height: 1;
+                    font-size: 18px;
+                    padding: 10px 28px;
+                    background: #27f5be;
+                    color: #000;
+                    border: 0px solid rgba(255,255,255,.5);
+                    text-decoration: none;
+                    border-radius: 8px;
+                }
+
+                    .left-buttons a:active {
+                        background: #27f5be;
+                        color: #000;
+                    }
+
+                    .left-buttons a:nth-child(4) {
+                        display: none;
+                    }
+
+            /* ===== DESCARGA APP ===== */
+            .app-download {
+                position: fixed;
+                z-index: 9999;
+                top: 88%;
+                left: 21%;
+                text-align: left;
+                /* oculto por defecto */
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity .22s ease, transform .18s ease;
+                transform: translateY(8px);
+            }
+
+                .app-download.visible {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
+                .app-download .btn {
+                    font-size: 18px;
+                    padding: 10px 28px;
+                    border-radius: 8px;
+                    color: #000; /* ← texto blanco */
+                    background: linear-gradient(30deg, #27f5be, #057054); /* ← nuevo fondo */
+
+                    text-decoration: none;
+                    transition: background-color .18s ease, transform .08s ease; /* mismo efecto */
+                    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+                }
+
+                    .app-download .btn:hover {
+                        filter: brightness(.95);
+                        transform: translateY(-2px);
+                    }
+
+                .app-download .text {
+                    font-size: 20px; /* ajustá acá el tamaño */
+                    color: #057054; /* o el color que quieras */
+                    text-shadow: 0 0 15px #27f5be;
+                    margin-top: 4px;
+                    text-align: center;
+                }
+            
+            /* ===== PAGE 2 — TEXTOS ===== */
+            .page2-text-top {
+                width: 100%;
+                text-align: center;
+                font-family: 'Poppins', sans-serif;
+                font-size: 25px;
+                color: #000;
+                margin-top: 0;
+            }
+
+            .page2-text-bottom {
+                width: 100%;
+                text-align: center;
+                font-family: 'Arimo', sans-serif;
+                font-size: 17px;
+                color: #000;
+                margin-bottom: 50px;
+                padding: 0 5px;
+            }
+            /* ===== PAGE 2 — CARRUSELES ===== */
+            .mobile-carousel-wrapper {
+                display: block;
+            }
+
+
+            /* CONTENEDOR PRINCIPAL (editable) */
+            .mobile-carousel-wrapper {
+                position: relative;
+                top: 0px; /* ⬅ mover vertical */
+                left: 0;
+                width: 100%;
+                height: 65vh;
+                margin: 32px 0; /* ⬅ tamaño general */
+                z-index: 30;
+                background: transparent;
+            }
+
+            .mobile-carousel-track {
+                display: flex;
+                gap: 5px;
+                height: 100%;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: 0 16px;
+            }
+
+
+            .mobile-item {
+                min-width: 75%; /* ⬅ ancho de cada carrusel */
+                height: 100%;
+                scroll-snap-align: center;
+                position: relative;
+            }
+
+            .mini-carousel {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+            }
+
+                .mini-carousel img {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    opacity: 0;
+                    transition: opacity .3s ease;
+                }
+
+                    .mini-carousel img.active {
+                        opacity: 1;
+                    }
+
+            /* NOMBRE + HALO */
+            .mobile-label {
+                font-size: 35px;
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: #fff;
+                font-weight: 700;
+                letter-spacing: 1px;
+                text-shadow: 0 0 20px rgba(0,0,0,.9);
+                pointer-events: none;
+            }
+
+            .coming-mobile {
+                position: absolute;
+                top: 80%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #057054;
+                font-size: 28px;
+                font-weight: 900;
+                text-shadow: 0 0 20px #27f5be;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity .4s ease;
+                z-index: 5;
+            }
+
+                .coming-mobile.visible {
+                    opacity: 1;
+                }
+
+            .model-slot {
+                width: 10%;
+                aspect-ratio: 9 / 16;
+            }
+
+
+
+            /* POSICIONES MOBILE – ajustables */
+            #slot-luna {
+                top: -80px;
+                left: -20%;
+                width: 80%;
+            }
+
+            #slot-sol {
+                top: -80px;
+                left: 60%;
+                width: 80%;
+            }
+
+            #slot-melissa {
+                top: 10px;
+                left: 10%;
+                width: 80%;
+            }
+            /* ===== PAGE 3 — GESTUAL ===== */
+            .slot-gestual {
+                position: absolute;
+                top: 360px;
+                left: 1%;
+                width: 40%;
+                aspect-ratio: 9 / 16;
+            }
+
+            #slot-gestual {
+                display: none !important;
+            }
+
+            /* ===== PAGE 3 — TEXTOS SUPERIORES ===== */
+            .page3-text-wrapper {
+                width: 100%;
+                text-align: center;
+                padding-top: 60px; /* ⬅ bajás/subís TODO el bloque */
+                padding-bottom: 20px;
+            }
+
+            .page3-title,
+            .page3-subtitle {
+                font-family: 'Arimo', sans-serif;
+                font-size: 23px;
+                margin: 0;
+                color: #000;
+            }
+
+            .page3-claim {
+                font-family: 'Poppins', sans-serif;
+                font-size: 16px;
+                margin-top: 6px;
+                color: #000;
+            }
+
+            /* ===== FORMULARIO ===== */
+            #google-doc-container {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 80vh;
+                margin: 0 auto;
+                margin-top: 30px; /* separa del texto */
+            }
+
+            .slot-form {
+                width: 100%;
+                height: 90%;
+            }
+
+                .slot-form iframe {
+                    width: 100%;
+                    height: 100%;
+                }
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Fixed left 2x2 buttons -->
+    <nav class="left-buttons" aria-label="Navegación rápida">
+        <a href="#page3">Sumate a lo que viene!!!</a>
+        <a href="#page2">¡¡¡ENAMORATE!!!</a>
+        <a href="#page4">¿Quiénes Somos?</a>
+        <a href="#page3"> Control con MAGIA</a>
+    </nav>
+
+    <!-- App download bottom-right -->
+    <div class="app-download">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.kadabra.iluminacion&pcampaignid=web_share" target="_blank">Descargar app Android</a>
+        <div style="display:flex; gap:12px; margin-top:18px;">
+        </div>
+        <div class="text">Pronto Disponible para IOS</div>
+    </div>
+
+    <!-- Pages wrapper -->
+    <div class="page-wrap">
+
+        <!-- SECTION 1 (hero) -->
+        <section id="page1" class="full s1" aria="Portada">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="hero-text">
+                    
+                    <div class="hero-subtitle">Iluminación inteligente</div>
+                    <div class="hero-claim">Encendé tu magia</div>
+                    <div class="hero-description">
+                        La iluminación dejó de ser un accesorio.<br>
+                        Hoy crea emociones, memorias, atmósferas y experiencias.<br>
+                        Con un solo gesto, tu espacio se convierte en algo increíble...
+                    </div>
+                </div>
+
+                <!-- Texto principal ya integrado en la imagen; incluimos CTA accesible -->
+                <div style="max-width:720px; margin-left:6%; text-align:left;">
+
+                    <div style="display:flex; gap:12px; margin-top:18px;">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 (productos) -->
+        <section id="page2" class="full s2" aria-label="Productos">
+            <div class="overlay"></div>
+
+            <!-- TEXTO SUPERIOR -->
+            <div class="page2-text-top">
+                Iluminación con movimiento, emoción y magia.
+            </div>
+
+
+
+            <!-- ===============================
+    MOBILE — CARRUSEL DE CARRUSELES
+    =============================== -->
+            <div class="mobile-carousel-wrapper">
+
+                <div class="mobile-carousel-track">
+
+                    <!-- LUNA -->
+                    <div class="mobile-item" data-gallery="luna">
+                        <div class="mini-carousel">
+                            <img src="images/luna_1.jpg" class="active">
+                            <img src="images/luna_2.gif">
+                            <img src="images/luna_3.gif">
+                            <img src="images/luna_4.jpg">
+                            <img src="images/luna_5.jpg" alt="Luna 5">
+                            <img src="images/luna_6.jpg" alt="Luna 6">
+                            <img src="images/luna_7.jpg" alt="Luna 7">
+                            <img src="images/luna_8.jpg" alt="Luna 8">
+                            <img src="images/luna_9.jpg" alt="Luna 9">
+                        </div>
+                        <div class="mobile-label">LUNA</div>
+                    </div>
+
+                    <!-- SOL -->
+                    <div class="mobile-item" data-gallery="sol">
+                        <div class="mini-carousel">
+                            <img src="images/sol_1.jpg" class="active" alt="Sol 1">
+                            <img src="images/sol_2.gif" alt="Sol animado">
+                            <img src="images/sol_3.gif" alt="Sol animado">
+                            <img src="images/sol_4.jpg" alt="Sol 4">
+                            <img src="images/sol_5.jpg" alt="Sol 5">
+                            <img src="images/sol_6.jpg" alt="Sol 6">
+                            <img src="images/sol_7.jpg" alt="Sol 7">
+                            <img src="images/sol_8.jpg" alt="Sol 8">
+                            <img src="images/sol_9.jpg" alt="Sol 9">
+                            <img src="images/sol_10.jpg" alt="Sol 10">
+                            <img src="images/sol_11.jpg" alt="Sol 11">
+                        </div>
+                        <div class="mobile-label">SOL</div>
+                    </div>
+
+                    <!-- MELISSA -->
+                    <div class="mobile-item melissa" data-gallery="melissa">
+                        <div class="mini-carousel">
+                            <img src="images/melissa_1.jpg">
+                        </div>
+
+                        <div class="coming coming-mobile">PROXIMAMENTE</div>
+                        <div class="mobile-label">MELISSA</div>
+                    </div>
+
+                    <!-- APP + GESTUAL -->
+                    <div class="mobile-item" data-gallery="gestual">
+                        <div class="mini-carousel">
+                            <img src="images/gestual_1.gif" class="active">
+                            <img src="images/gestual_2.gif">
+                            <img src="images/gestual_3.jpg" alt="gestual 3">
+                        </div>
+                        <div class="mobile-label">APP & GESTUAL</div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- TEXTO INFERIOR -->
+            <div class="page2-text-bottom">
+                Creamos lámparas que no solo iluminan: se mueven, reaccionan,
+                sorprenden y generan presencia. Fusionamos diseño minimalista,
+                tecnología de vanguardia, movimiento real y experiencias emocionales.
+            </div>
+
+        </section>
+
+        <!-- SECTION 3 (app & gestual + formulario) -->
+        <section id="page3" class="full s3" aria-label="App y gestual">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="page3-text-wrapper">
+                    <div class="page3-title">Primera edición - Acceso anticipado</div>
+                    <div class="page3-subtitle">Registrate:</div>
+                    <div class="page3-claim">Se parte del comienzo</div>
+                </div>
+
+
+                <!-- FORMULARIO FUERA DEL FLEX -->
+                <div id="google-doc-container" class="draggable">
+                    <div class="slot-form" id="slot-form">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdKzm6vuRIVh3XjKB7LHHP4oJjRDl56FYncTK54Lu0sEjA8pA/viewform?embedded=true"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SECTION 4 (quienes somos - storytelling) -->
+        <section id="page4" class="full s4" aria-label="Quiénes somos">
+            <div class="overlay"></div>
+            <div class="container">
+                <!-- Todo el contenido textual ya está en la imagen; solo dejamos ancla -->
+            </div>
+        </section>
+
+    </div> <!-- /page-wrap -->
+    <!-- SCRIPTS: carrusel genérico -->
+    <!-- lightbox: abrir imagenes con click -->
+    <div id="lightbox" class="hidden">
+        <div class="lightbox-close">×</div>
+        <img id="lightbox-img" src="">
+    </div>
+
+
+
+    <script>
+        /* ===============================
+           AUTO ROTACIÓN DE MINI CARRUSELES
+           =============================== */
+        document.querySelectorAll('.mini-carousel').forEach(carousel => {
+            const imgs = carousel.querySelectorAll('img');
+            let i = 0;
+
+            setInterval(() => {
+                const lightbox = document.getElementById('lightbox');
+                if (!lightbox.classList.contains('hidden')) return;
+
+                imgs[i].classList.remove('active');
+                i = (i + 1) % imgs.length;
+                imgs[i].classList.add('active');
+            }, 2500);
+        });
+
+
+        /* ===============================
+           TAP → ABRIR FULLSCREEN
+           =============================== */
+        document.querySelectorAll('.mobile-item').forEach(item => {
+            let startX = 0;
+            let moved = false;
+
+            item.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                moved = false;
+            });
+
+            item.addEventListener('touchmove', (e) => {
+                if (Math.abs(e.touches[0].clientX - startX) > 10) {
+                    moved = true;
+                }
+            });
+
+            item.addEventListener('touchend', (e) => {
+                if (moved) return; // fue swipe, no tap
+
+                const imgs = item.querySelectorAll('img');
+                if (!imgs.length) return;
+
+                let index = 0;
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+
+                lightboxImg.src = imgs[index].src;
+                lightbox.classList.remove('hidden');
+
+                lightboxImg.onclick = (ev) => {
+                    ev.stopPropagation();
+                    index = (index + 1) % imgs.length;
+                    lightboxImg.src = imgs[index].src;
+                };
+            });
+        });
+
+
+        /* ===============================
+           TAP AFUERA → CERRAR FULLSCREEN
+           =============================== */
+        document.getElementById('lightbox').addEventListener('click', () => {
+            document.getElementById('lightbox').classList.add('hidden');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth > 780) return;
+
+            const coming = document.querySelector('.coming-mobile');
+            if (!coming) return;
+
+            setTimeout(() => {
+                coming.classList.add('visible');
+            }, 4000);
+        });
+    </script>
+    <script>
+        (function () {
+            const leftButtons = document.querySelector('.left-buttons');
+            const appDownload = document.querySelector('.app-download');
+            const page1 = document.getElementById('page1');
+
+            if (!leftButtons || !appDownload || !page1) return;
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.intersectionRatio > 0.45) {
+                            leftButtons.classList.add('visible');
+                            appDownload.classList.add('visible');
+                        } else {
+                            leftButtons.classList.remove('visible');
+                            appDownload.classList.remove('visible');
+                        }
+                    });
+                },
+                {
+                    threshold: [0.45]
+                }
+            );
+
+            observer.observe(page1);
+        })();
+    </script>
+
+
+
+
+
+
+</body>
+</html>
+
+
