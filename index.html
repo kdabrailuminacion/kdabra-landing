@@ -1,41 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>K'dabra — Landing</title>
+    <title>K'dabra — Iluminación inteligente</title>
 
-    <script>
-        if (window.innerWidth < 780) {
-            window.location.replace("mobile.html");
-        }
-    </script>
-    <!-- Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Cinzel:wght@400;600&family=Arimo:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --btn-brown: #63400A;
-            --btn-brown-hover: #27f5be;
-            --app-gradient: linear-gradient(90deg,#FFB84D,#27f5be);
-            --white: #ffffff;
+            --green:  #FF4D00;
+            --green2: #FF9F1C;
+            --brown:  #1B1B3A;
+            --white:  #ffffff;
+            --black:  #0B0B12;
+            --dark:   #FFD166;
         }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         html, body {
-            scroll-snap-type: y mandatory;
             height: 100%;
             overflow-x: hidden;
-            margin: 0;
-            font-family: Arial, Arial, Arial;
+            font-family: 'Arimo', Arial, sans-serif;
             color: var(--white);
-            background: #111;
+            background: var(--dark);
         }
 
-        /* Scroll fullpages */
-        .page-wrap {
-            height: auto;
-        }
+        .page-wrap { height: auto; }
 
         section.full {
             min-height: 100vh;
@@ -44,810 +37,1000 @@
             align-items: center;
             justify-content: center;
             position: relative;
-        }
-
-       
-
-        /* Background images per section */
-        .s1 {
-            min-height: 100vh; /* fuerza altura completa */
-            display: flex;
-            position: relative;
-            background-image: url('images/page1.jpg');
             background-repeat: no-repeat;
             background-position: center center;
-            background-size: contain;
+            background-size: cover;
         }
 
-        .s2 {
-            background-image: url('images/page2.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: contain;
-        }
-
-        .s3 {
-            background-image: url('images/page3.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: contain;
-        }
-
+        /*
+           .s4 lleva texto/diseño "horneado" dentro de la imagen,
+           así que ahí NO podemos usar "cover" (recorta) — usamos "contain"
+           para que la imagen se vea siempre completa, centrada y sin
+           deformarse, sin importar la proporción de pantalla del usuario.
+           El espacio sobrante se rellena con #f5efe4 para que no se note.
+        */
         .s4 {
-            background-image: url('images/page4.jpg');
+            background-size: contain !important;
+            background-color: #f5efe4;
+        }
+
+        /*
+           PAGE 1 — HERO FRAME
+           En vez de poner el fondo directo en la sección (que llenaba
+           toda la pantalla y dejaba los botones "sueltos" fuera de la
+           imagen en pantallas anchas), el fondo y los botones ahora
+           viven DENTRO de este mismo bloque, con las MISMAS proporciones
+           que tu imagen. Así los botones quedan siempre pegados al
+           mismo lugar de tu diseño, sea cual sea el ancho de pantalla.
+        */
+        .hero-frame {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
             background-repeat: no-repeat;
             background-position: center center;
             background-size: contain;
+            background-color: #f5efe4;
         }
 
-        /* Overlay */
-        .overlay {
+        /* Texto del hero — base compartida entre mobile y desktop */
+        .hero-text {
             position: absolute;
-            inset: 0;
-            display: none;
-            pointer-events: none;
-        }
-
-        /* Container */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 40px;
-            box-sizing: border-box;
-            position: relative;
-            z-index: 3;
-        }
-
-
-
-        /* ---------------------------------
-             LEFT 4 BUTTONS — SOLO EN PAGE 1
-             --------------------------------- */
-
-        /* Aparecen solo en la sección 1 */
-        /* ---------- CONTROL DE VISIBILIDAD (botones fijos) ---------- */
-
-        /* contenedor fijo (posición y estética) - siempre fixed para estabilidad */
-        .left-buttons {
-            position: fixed;
-            left: 120px;
-            top: 80%;
-            transform: translateY(-50%) translateY(-8px); /* empezamos levemente desplazados */
-            display: grid;
-            grid-template-columns: repeat(2, auto);
-            grid-template-rows: repeat(2, auto);
-            gap: 3px;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .22s ease, transform .18s ease;
-        }
-
-            /* estilo de los <a> (sin cambios funcionales) */
-            .left-buttons a {
-                display: inline-block;
-                padding: 13px 20px;
-                background: conic-gradient(30deg, #27f5be, #27f5be);
-                color: var(--white);
-                border-radius: 4px;
-                text-decoration: none;
-                font-size: 22px;
-                font-weight: 600;
-                transition: background-color .18s ease, transform .08s ease;
-                box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-            }
-
-                .left-buttons a:hover {
-                    background: var(--btn-brown-hover);
-                    color: #000;
-                    transform: translateY(-2px);
-                }
-
-        /* boton de descarga bottom-right (fixed pero oculto por defecto) */
-        .app-download {
-            position: fixed;
-            right: 11%;
-            bottom: 5%;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .22s ease, transform .18s ease;
-            transform: translateY(8px);
-        }
-
-            .app-download .btn {
-                padding: 10px 20px;
-                border-radius: 4px;
-                color: #000; /* ← texto blanco */
-                background: linear-gradient(30deg, #27f5be, #057054); /* ← nuevo fondo */
-                font-size: 25px;
-                text-decoration: none;
-                transition: background-color .18s ease, transform .08s ease; /* mismo efecto */
-                box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-            }
-
-                .app-download .btn:hover {
-                    filter: brightness(.95);
-                    transform: translateY(-2px);
-                }
-
-            .app-download .text {
-                font-size: 22px; /* ajustá acá el tamaño */
-                color: #057054; /* o el color que quieras */
-                text-shadow: 0 0 15px #27f5be;
-                margin-top: 4px;
-                text-align: center;
-            }
-
-
-        /* cuando añadamos la clase .visible, aparecen y quedan en su lugar */
-        .left-buttons.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(-50%) translateY(0);
-        }
-
-        .app-download.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-
-
-        /* ---------------------------------
-             SECTION 2 — MODELOS
-             --------------------------------- */
-        #slot-luna,
-        #slot-sol,
-        #slot-melissa {
-            position: absolute; /* ← hace que puedas moverlos donde quieras */
-            z-index: 10;
-        }
-
-        #slot-luna {
-            top: 65px;
-            left: 0%;
-        }
-
-        #slot-sol {
-            top: 65px;
-            left: 39%;
-        }
-
-        #slot-melissa {
-            top: 65px;
-            left: 78%;
-            position: absolute;
-        }
-
-            /* Texto "PROXIMAMENTE" */
-            #slot-melissa .coming {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: #057054;
-                font-size: 26px;
-                font-weight: 900;
-                text-shadow: 0 0 20px #27f5be;
-                background: none;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity .25s ease;
-            }
-
-            /* Mostrar al pasar el cursor */
-            #slot-melissa:hover .coming {
-                opacity: 1;
-            }
-
-        /* LIGHTBOX GENERAL */
-        #lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(4px);
-            z-index: 999999;
-        }
-
-            #lightbox.hidden {
-                display: none;
-            }
-
-            #lightbox img {
-                max-width: 90%;
-                max-height: 90%;
-                border-radius: 8px;
-                cursor: pointer;
-            }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 48px;
-            color: white;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .models-row {
-            width: 80%;
-            max-width: 900px;
-            margin-left: 5%; /* queda pegado a la izquierda */
-            margin-right: auto;
-            position: relative; /* ahora sirve como “escenario” */
-            height: 500px;
-            gap: 26px;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 40px 24px;
-            box-sizing: border-box;
-        }
-
-        .model-slot {
-            width: 35%;
-            aspect-ratio: 9 / 14; /* ← ESTO los hace cuadrados */
-            background: rgba(255,255,255,0.06);
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-            .model-slot.empty {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: rgba(255,255,255,0.7);
-                font-weight: 700;
-                font-size: 20px;
-            }
-
-        /* ---------------------------------
-             SECTION 3 — APP / FORM
-             --------------------------------- */
-        #google-doc-container {
-            position: absolute;
-            top: -110px;
-            left: 675px; /* ahora sí responde */
-            z-index: 50;
-            cursor: move;
-        }
-
-
-        .page3-inner {
-            display: flex;
-            gap: 40px;
-            align-items: start;
-            justify-content: center;
-            padding: 40px;
-            box-sizing: border-box;
-        }
-
-        .slot-gestual {
-            width: 27%;
-            aspect-ratio: 9 / 14;
-            background: rgba(255,255,255,0.06);
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,.15);
-        }
-
-        .slot-form {
-            width: 470px;
-            height: 500px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 5px;
-            padding: 10px;
-            box-sizing: border-box;
-            overflow: auto;
-        }
-
-        #slot-form iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        /* ---------------------------------
-             CAROUSEL
-             --------------------------------- */
-
-        .carousel {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: transparent; /* <- importante: quitar el #111 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-            .carousel .slides {
-                position: relative;
-                width: 100%;
-                height: 100%;
-            }
-
-            .carousel img, .carousel video {
-                position: absolute;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                opacity: 0;
-                transition: opacity .25s ease, transform .25s ease;
-            }
-
-                .carousel img.active, .carousel video.active {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-
-            .carousel:hover img.active, .carousel:hover video.active {
-                transform: scale(1.02);
-            }
-
-        .dots {
-            position: absolute;
-            bottom: 10px;
+            top: 12%;
             left: 50%;
             transform: translateX(-50%);
+            width: 88%;
+            max-width: 560px;
+            text-align: center;
+            color: #000;
+            z-index: 2;
+        }
+        .hero-title { font-family: 'Cinzel', serif; font-weight: 600; margin: 0 0 6px; color: #FF4D00; font-size: 36px; }
+        .hero-subtitle { font-family: 'Poppins', sans-serif; font-weight: 400; margin: 0 0 10px; color: #000; line-height: 1.4; font-size: 16px; }
+        .hero-cta-block { background: rgba(255,255,255,.72); border-radius: 12px; padding: 10px 14px; margin-top: 6px; }
+        .hero-cta-series { font-family: 'Poppins', sans-serif; font-weight: 600; color: #000; font-size: 15px; }
+        .hero-cta-price { font-family: 'Arimo', sans-serif; font-weight: 700; color: var(--green2); margin: 2px 0; font-size: 23px; }
+        .hero-cta-shipping { font-family: 'Arimo', sans-serif; color: #000; font-size: 14px; }
+
+        .overlay { position: absolute; inset: 0; pointer-events: none; }
+
+        /* ===================== LIGHTBOX ===================== */
+        #lightbox {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.95);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10000;
+        }
+        #lightbox.hidden { display: none; }
+        #lightbox img { max-width: 95%; max-height: 95%; object-fit: contain; }
+        .lightbox-close {
+            position: absolute; top: 16px; right: 20px;
+            font-size: 32px; color: var(--white); cursor: pointer;
+            z-index: 10001; padding: 8px 14px; line-height: 1;
+        }
+
+        /* =====================================================
+           INDICADOR DE CARRUSEL (puntitos + swipe hint)
+           ===================================================== */
+        .carousel-dots {
             display: flex;
-            gap: 8px;
-            z-index: 10;
+            justify-content: center;
+            gap: 7px;
+            margin: 10px 0 4px;
+        }
+        .carousel-dots .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(0,0,0,.25);
+            transition: background .25s, transform .25s;
+            flex-shrink: 0;
+        }
+        .carousel-dots .dot.active {
+            background: var(--green);
+            transform: scale(1.3);
+        }
+        .swipe-hint {
+            text-align: center;
+            font-family: 'Arimo', sans-serif;
+            font-size: 13px;
+            color: rgba(0,0,0,.5);
+            letter-spacing: .04em;
+            margin-bottom: 6px;
+            user-select: none;
+        }
+        .swipe-hint span { display: inline-block; animation: swipeAnim 1.6s ease-in-out infinite; }
+        @keyframes swipeAnim {
+            0%,100% { transform: translateX(0); opacity: .5; }
+            50%      { transform: translateX(6px); opacity: 1; }
         }
 
-            .dots .dot {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background: rgba(255,255,255,.6);
-                cursor: pointer;
-                transition: transform .12s;
-            }
-
-                .dots .dot.active {
-                    background: #fff;
-                    transform: scale(1.15);
-                }
-
-        /* ---------------------------------
-             RESPONSIVE
-             --------------------------------- */
-
-        @media(max-width:1200px) {
-            .models-row {
-                gap: 20px;
-                padding: 30px;
-                transform: scale(.95);
-            }
-
-            .model-slot {
-                width: 330px;
-                height: 316px;
-            }
-
-            .slot-gestual {
-                width: 330px;
-                height: 316px;
-            }
-
-            .slot-form {
-                width: 180px;
-                height: 275px;
-            }
-        }
-
-        @media(max-width:780px) {
-            .left-buttons {
-                display: none;
-            }
-
-            .models-row {
-                flex-direction: column;
-                align-items: center;
-                transform: none;
-            }
-
-            .model-slot {
-                width: 86%;
-                height: auto;
-                aspect-ratio: 9/16;
-            }
-
-            .page3-inner {
-                flex-direction: column;
-                gap: 18px;
-                padding: 18px;
-                align-items: center;
-            }
-
-            .slot-gestual, .slot-form {
-                width: 50%;
-                height: auto;
-                aspect-ratio: 9/16;
-            }
-        }
-
-        .anchor-target {
-            scroll-margin-top: 30px;
-        }
-
-        .mobile-carousel-wrapper {
+        /* =====================================================
+           BOTÓN MERCADO PAGO (post-form)
+           ===================================================== */
+        .mp-btn-wrapper {
             display: none;
+            text-align: center;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .mp-btn-wrapper.visible { display: block; }
+        .mp-btn-wrapper p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .mp-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #009ee3;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background .18s, transform .1s;
+        }
+        .mp-btn:hover { background: #007ab8; transform: translateY(-2px); }
+        .mp-btn-wrapper .mp-note {
+            font-family: 'Arimo', sans-serif;
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
         }
 
-        /* mover el slot de formulario manualmente */
-        .draggable {
-            position: absolute;
-            top: -15px;
-            left: 1300px;
-            cursor: move;
-            z-index: 9999;
+        /* ========================================================
+           DESKTOP (> 780px)
+           ======================================================== */
+        @media (min-width: 781px) {
+            .s1 { background-image: url('images/page1.jpg'); }
+            .s2 { background-image: url('images/page2.jpg');  background-color: #0B0B12; }
+            .s3 { background-image: url('images/page3.jpg'); background-color: #0B0B12; }
+            .s4 { background-image: url('images/page4.jpg'); background-color: #0B0B12; }
+            .s5 { background-image: url('images/page5.jpg'); background-color: #0B0B12; }
+
+            /* El frame del hero mantiene la proporción exacta de tu imagen
+               (1920x1080). Así, sea cual sea el ancho de la ventana, el
+               frame nunca deja franjas DENTRO de sí mismo, y los botones
+               (posicionados en % dentro de este frame) siempre quedan
+               pegados al mismo lugar del diseño. */
+            #page1 {
+                background-color: #0B0B12;
+            }
+            .hero-frame {
+                height: 100vh;
+                width: auto;
+                max-width: 100%;
+                aspect-ratio: 1920 / 1080;
+                margin: 0 auto;
+            }
+
+            .left-buttons {
+                font-family: 'Arimo', sans-serif;
+                position: absolute; z-index: 9999;
+                top: 65%; left: 7%;
+                transform: translateY(-50%);
+                display: flex; flex-direction: column; gap: 8px;
+                opacity: 0; pointer-events: none;
+                transition: opacity .22s ease;
+            }
+            .left-buttons.visible { opacity: 1; pointer-events: auto; }
+            .left-buttons a {
+                display: block; text-align: center; line-height: 1;
+                font-size: 15px; font-weight: 700;
+                padding: 11px 22px;
+                background: #FF9F1C; color: #000;
+                text-decoration: none; border-radius: 8px;
+                transition: background .18s, transform .1s;
+            }
+            .left-buttons a:hover { background: #FF4D00; color: #fff; transform: translateY(-2px); }
+
+            .app-download {
+                font-family: 'Arimo', sans-serif;
+                position: absolute; z-index: 9999;
+                bottom: 6%; left: 7%;
+                opacity: 0; pointer-events: none;
+                transition: opacity .22s ease;
+            }
+            .app-download.visible { opacity: 1; pointer-events: auto; }
+            .app-download .btn {
+                display: inline-block; font-size: 15px; font-weight: 700;
+                padding: 11px 28px; border-radius: 8px; color: #000;
+                background: linear-gradient(30deg, #FF4D00, #FF9F1C);
+                text-decoration: none; transition: filter .18s, transform .1s;
+            }
+            .app-download .btn:hover { filter: brightness(.9); transform: translateY(-2px); }
+            .app-download .text {
+                font-size: 20px; color: #0B0B12;
+                text-shadow: 0 0 16px #0B0B12;
+                margin-top: 5px; text-align: center;
+            }
+
+            /* Hero text visible también en desktop, mismo contenido que mobile */
+            .hero-text { top: 25%; max-width: 480px; }
+            .hero-title { font-size: 44px; }
+            .hero-subtitle { font-size: 18px; }
+            .hero-cta-price { font-size: 28px; }
+
+            #page2 {
+                display: flex; flex-direction: column;
+                align-items: center; justify-content: center;
+                padding: 60px 40px;
+            }
+            .page2-text-top {
+                font-family: 'Poppins', sans-serif; font-size: 30px;
+                color: var(--green); text-align: center; margin-bottom: 20px;
+            }
+            .page2-text-bottom {
+                font-family: 'Arimo', sans-serif; font-size: 22px;
+                color: var(--green); text-align: center;
+                max-width: 700px; margin-top: 20px; line-height: 1.6;
+            }
+            .mobile-carousel-wrapper {
+                display: flex; gap: 16px; justify-content: center;
+                width: 100%; max-width: 1100px;
+            }
+            .mobile-item {
+                flex: 1; max-width: 240px;
+                aspect-ratio: 9 / 16; position: relative;
+                border-radius: 12px; overflow: hidden;
+            }
+            .mini-carousel { width: 100%; height: 100%; border-radius: 10px; overflow: hidden; position: relative; }
+            .mini-carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s ease; }
+            .mini-carousel img.active { opacity: 1; }
+            .mobile-label {
+                font-size: 28px; font-weight: 700;
+                position: absolute; bottom: 14px; left: 50%;
+                transform: translateX(-50%); color: #fff;
+                letter-spacing: 1px; text-shadow: 0 0 20px rgba(0,0,0,.9);
+                pointer-events: none; white-space: nowrap;
+            }
+            .coming-mobile {
+                position: absolute; top: 50%; left: 50%;
+                transform: translate(-50%,-50%);
+                color: #FF4D00; font-size: 22px; font-weight: 900;
+                text-shadow: 0 0 20px #FF9F1C;
+                opacity: 0; pointer-events: none;
+                transition: opacity .4s ease; z-index: 5;
+            }
+            .coming-mobile.visible { opacity: 1; }
+            .mobile-carousel-track { display: contents; }
+
+            /* Ocultar puntitos y swipe en desktop (no aplica) */
+            .carousel-dots, .swipe-hint { display: none; }
+
+            #page3 {
+                display: flex; flex-direction: column;
+                align-items: center; justify-content: center;
+                padding: 20px 40px 40px;
+                gap: 0;
+            }
+            .page3-text-wrapper { text-align: center; margin-bottom: 12px; }
+            .page3-title { font-family: 'Cinzel', serif; font-size: 36px; color: var(--green); margin-bottom: 6px; }
+            .page3-subtitle { font-family: 'Poppins', sans-serif; font-size: 22px; color: #fff; }
+            .page3-claim { font-family: 'Arimo', sans-serif; font-size: 15px; color: #fff; margin-top: 4px; }
+            #google-doc-container { width: 100%; max-width: 680px; }
+            .slot-form iframe { display: none; }
+            #page4 .container { display: none; }
+            #page5 { flex-direction: column; align-items: center; justify-content: center; padding: 80px 40px; }
         }
-        /* mover el slot de carrusel gestual manualmente */
-        .slot-gestual.draggable {
-            position: absolute;
-            top: -130px; /* posición inicial */
-            left: 75px;
-            cursor: move;
-            z-index: 9999;
+
+        /* ========================================================
+           MOBILE (≤ 780px)
+           ======================================================== */
+        @media (max-width: 780px) {
+            .s1 { background-image: url('images/page1-mobile.jpg'); }
+            .s2 { background-image: url('images/page2-mobile.jpg'); }
+            .s3 { background-image: url('images/page3-mobile.jpg');  }
+            .s4 { background-image: url('images/page4-mobile.jpg');  }
+            .s5 { background-image: url('images/page5-mobile.jpg');  }
+
+            /* El hero en mobile vuelve a "cover" (como en la versión que
+               funcionaba bien): llena toda la pantalla sin franjas. */
+            .hero-frame {
+                background-size: cover;
+                background-position: center top;
+            }
+
+            .left-buttons {
+                font-family: 'Arimo', sans-serif;
+                position: fixed; z-index: 9999;
+                top: 50%; left: 50%; transform: translateX(-50%);
+                display: flex; flex-direction: column; gap: 6px;
+                opacity: 0; pointer-events: none;
+                transition: opacity .22s ease; width: 72%;
+            }
+            .left-buttons.visible { opacity: 1; pointer-events: auto; }
+            .left-buttons a {
+                display: block; text-align: center;
+                font-size: 16px; font-weight: 700;
+                padding: 11px 20px; background: #FF9F1C;
+                color: #000; text-decoration: none; border-radius: 8px;
+            }
+            .left-buttons a:active { background: #FF4D00; color: #fff; }
+
+            .app-download {
+                font-family: 'Arimo', sans-serif;
+                position: fixed; z-index: 9999;
+                top: 73%; left: 50%; transform: translateX(-50%);
+                text-align: center; opacity: 0; pointer-events: none;
+                transition: opacity .22s ease; width: 72%;
+            }
+            .app-download.visible { opacity: 1; pointer-events: auto; }
+            .app-download .btn {
+                display: block; font-size: 16px; font-weight: 700;
+                padding: 11px 20px; border-radius: 8px; color: #000;
+                background: linear-gradient(30deg, #FF9F1C, #FF4D00);
+                text-decoration: none;
+            }
+            .app-download .text { font-size: 14px; color: #0B0B12; text-shadow: 0 0 12px #0B0B12; margin-top: 5px; }
+
+            #page2 { display: block; min-height: 100vh; padding-top: 50px; }
+            .page2-text-top { width: 100%; text-align: center; font-family: 'Poppins', sans-serif; font-size: 20px; color: #000; padding: 0 16px; }
+            .page2-text-bottom { width: 100%; text-align: center; font-family: 'Arimo', sans-serif; font-size: 15px; color: #000; margin-bottom: 40px; padding: 0 20px; line-height: 1.5; }
+
+            .mobile-carousel-wrapper { position: relative; width: 100%; height: 62vh; margin: 12px 0 4px; }
+            .mobile-carousel-track {
+                display: flex; gap: 5px; height: 100%;
+                overflow-x: auto; scroll-snap-type: x mandatory;
+                padding: 0 16px;
+                scrollbar-width: none;
+            }
+            .mobile-carousel-track::-webkit-scrollbar { display: none; }
+            .mobile-item { min-width: 75%; height: 100%; scroll-snap-align: center; position: relative; }
+            .mini-carousel { width: 100%; height: 100%; border-radius: 10px; overflow: hidden; position: relative; }
+            .mini-carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s ease; }
+            .mini-carousel img.active { opacity: 1; }
+            .mobile-label { font-size: 32px; font-weight: 700; position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: #fff; letter-spacing: 1px; text-shadow: 0 0 20px rgba(0,0,0,.9); pointer-events: none; }
+            .coming-mobile { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #FF4D00; font-size: 26px; font-weight: 900; text-shadow: 0 0 20px #FF9F1C; opacity: 0; pointer-events: none; transition: opacity .4s ease; z-index: 5; }
+            .coming-mobile.visible { opacity: 1; }
+
+            /* PAGE 3 MOBILE — formulario arriba con poco margen */
+            #page3 { display: block; min-height: 100vh; padding-top: 16px; }
+            .page3-text-wrapper { width: 100%; text-align: center; padding: 0 20px 8px; }
+            .page3-title { font-family: 'Cinzel', serif; font-size: 22px; color: var(--green); margin-bottom: 4px; }
+            .page3-subtitle { font-family: 'Poppins', sans-serif; font-size: 17px; color: #fff; }
+            .page3-claim { font-family: 'Arimo', sans-serif; font-size: 14px; color: #fff; margin-top: 4px; }
+            #google-doc-container { width: 100%; padding: 0 16px; margin-top: 6px; }
+            .slot-form iframe { display: none; }
+            #page4 .container { display: none; }
+            #page5 { flex-direction: column; padding: 60px 24px; }
         }
-        
+
+        /* =====================================================
+           FORMULARIO PROPIO
+           ===================================================== */
+        .reserva-card {
+            background: rgba(255,255,255,.96);
+            border-radius: 16px; padding: 22px 24px 20px;
+            width: 100%; max-width: 600px;
+            margin: 0 auto; color: #111;
+        }
+        .reserva-card .rc-titulo { font-family: 'Cinzel', serif; font-size: 30px; font-weight: 600; color: var(--green2); text-align: center; margin-bottom: 4px; }
+        .reserva-card .rc-desc { font-family: 'Poppins', sans-serif; font-size: 14px; color: #444; text-align: center; line-height: 1.5; margin-bottom: 10px; }
+        .reserva-card .rc-descuento { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--green2); text-align: center; margin-bottom: 8px; }
+        .reserva-card .rc-bullets { list-style: none; font-family: 'Arimo', sans-serif; font-size: 14px; color: #333; margin-bottom: 14px; display: flex; flex-direction: column; gap: 3px; }
+        .reserva-card .rc-bullets li::before { content: '✓ '; color: var(--green2); font-weight: 700; }
+
+        .btn-reserva-trigger {
+            display: block; width: 100%; padding: 13px;
+            background: var(--green2); color: #fff;
+            font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 600;
+            text-align: center; border: none; border-radius: 10px;
+            cursor: pointer; transition: background .18s, transform .1s;
+            margin-bottom: 8px;
+        }
+        .btn-reserva-trigger:hover { background: #FF9F1C; color: #000; transform: translateY(-2px); }
+
+        .rc-precios { text-align: center; font-family: 'Arimo', sans-serif; font-size: 14px; color: #555; }
+        .rc-precios .precio-actual { font-size: 20px; font-weight: 700; color: var(--green2); }
+        .rc-precios .precio-tachado { text-decoration: line-through; color: #999; margin-left: 8px; font-size: 15px; }
+
+        .form-collapse { display: none; margin-top: 14px; border-top: 1px solid #e0e0e0; padding-top: 14px; }
+        .form-collapse.open { display: block; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 4px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1.5px solid #ccc; border-radius: 8px; font-family: 'Arimo', sans-serif; font-size: 15px; color: #111; background: #fafafa; transition: border-color .18s; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--green2); }
+
+        .btn-submit { display: block; width: 100%; padding: 13px; background: var(--green2); color: #fff; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; text-align: center; border: none; border-radius: 10px; cursor: pointer; transition: background .18s, transform .1s; margin-top: 6px; }
+        .btn-submit:hover { background: #FF9F1C; color: #000; transform: translateY(-2px); }
+
+        .form-success { display: none; text-align: center; padding: 16px 10px; font-family: 'Poppins', sans-serif; }
+        .form-success .fs-icon { font-size: 38px; margin-bottom: 8px; }
+        .form-success .fs-title { font-size: 19px; font-weight: 600; color: var(--green2); margin-bottom: 8px; }
+        .form-success .fs-desc { font-size: 14px; color: #444; line-height: 1.6; }
+
+        /* =====================================================
+           FAQs
+           ===================================================== */
+        .faqs-wrapper { width: 100%; max-width: 680px; margin: 24px auto 0; }
+        .faqs-title { font-family: 'Cinzel', serif; font-size: 28px; color: var(--green); text-align: center; margin-bottom: 12px; }
+        .faq-item { border-bottom: 1px solid rgba(0,0,0,.15); }
+        .faq-question { width: 100%; background: none; border: none; text-align: left; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; color: #fff; padding: 13px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .faq-question .faq-icon { font-size: 20px; color: var(--green2); flex-shrink: 0; transition: transform .2s; }
+        .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+        .faq-answer { display: none; font-family: 'Arimo', sans-serif; font-size: 14px; color: #fff; line-height: 1.65; padding-bottom: 13px; }
+        .faq-answer.open { display: block; }
+        .faq-answer a { color: var(--green2); }
+
+        /* =====================================================
+           PAGE 5 — STORYTELLING
+           ===================================================== */
+        .story-wrapper { max-width: 780px; width: 100%; margin: 0 auto; text-align: center; }
+        .story-eyebrow { font-family: 'Cinzel', serif; font-size: 45px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+        .story-title { font-family: 'Cinzel', serif; font-size: clamp(26px, 4vw, 44px); font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 20px; }
+        .story-title span { color: var(--green); }
+        .story-body { font-family: 'Poppins', sans-serif; font-size: clamp(15px, 1.8vw, 18px); color: rgba(255,255,255,.85); line-height: 1.8; margin-bottom: 30px; }
+        .story-pillars { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 30px 0; }
+        .story-pillar { background: rgba(39,245,190,.08); border: 1px solid rgba(39,245,190,.25); border-radius: 14px; padding: 20px 22px; flex: 1; min-width: 200px; max-width: 220px; text-align: center; }
+        .story-pillar .sp-icon { font-size: 28px; margin-bottom: 8px; }
+        .story-pillar .sp-title { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+        .story-pillar .sp-desc { font-family: 'Arimo', sans-serif; font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.5; }
+        .story-quote { font-family: 'Cinzel', serif; font-size: clamp(16px, 2.2vw, 22px); color: var(--green); font-style: italic; margin: 30px auto; max-width: 580px; line-height: 1.5; position: relative; padding: 0 20px; }
+        .story-quote::before { content: '"'; font-size: 60px; opacity: .2; position: absolute; top: -20px; left: 0; }
+        .story-cta { display: inline-block; margin-top: 10px; padding: 14px 36px; background: var(--green); color: #000; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; border-radius: 10px; text-decoration: none; transition: background .18s, transform .1s; }
+        .story-cta:hover { background: var(--green2); color: #fff; transform: translateY(-2px); }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+        footer { background: #0a0a0a; padding: 30px 24px; text-align: center; }
+        .footer-inner { max-width: 680px; margin: 0 auto; }
+        .footer-brand { font-family: 'Cinzel', serif; font-size: 20px; color: var(--green); margin-bottom: 14px; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 14px; }
+        .footer-links a { font-family: 'Arimo', sans-serif; font-size: 14px; color: rgba(255,255,255,.7); text-decoration: none; transition: color .15s; }
+        .footer-links a:hover { color: var(--green); }
+        .footer-copy { font-family: 'Arimo', sans-serif; font-size: 12px; color: rgba(255,255,255,.35); }
     </style>
-
 </head>
 <body>
 
-    <!-- Fixed left 2x2 buttons -->
-    <nav class="left-buttons" aria-label="Navegación rápida">
-        <a href="#slot-form">Sumate a lo que viene!!!</a>
-        <a href="#page2">¡¡¡ENAMORATE!!!</a>
-        <a href="#page4">¿Quiénes Somos?</a>
-        <a href="#page3"> Control con MAGIA</a>
-    </nav>
+<div class="page-wrap">
 
-    <!-- App download bottom-right -->
-    <div class="app-download">
-        <a class="btn" href="https://play.google.com/store/apps/details?id=com.kadabra.iluminacion&pcampaignid=web_share" target="_blank">Descargar app Android</a>
-        <div style="display:flex; gap:12px; margin-top:18px;">
+    <!-- SECCIÓN 1 — HERO -->
+    <section id="page1" class="full" aria-label="Portada">
+        <div class="hero-frame s1">
+            <div class="overlay"></div>
+            <div class="hero-text">
+                <div class="hero-title">Lámparas con movimineto </div>
+                <div class="hero-subtitle">
+                    K'dabra combina movimiento sincronizado,<br>
+                    control gestual y app propia.
+                </div>
+                <div class="hero-cta-block">
+                    <div class="hero-cta-series">Primera serie · 100 unidades</div>
+                    <div class="hero-cta-price">$650.000</div>
+                    <div class="hero-cta-shipping">✈ Envío gratuito a toda la Argentina para las primeras reservas</div>
+                </div>
+            </div>
+
+            <!-- NAV BOTONES FIJOS -->
+            <nav class="left-buttons" aria-label="Navegación rápida">
+                <a href="#page3">Quiero la mia</a>
+                <a href="#page2">¡¡¡Enamórate!!!</a>
+                <a href="#page3">App K'dabra y Funciones</a>
+                <a href="#page4">¿Quiénes Somos?</a>
+            </nav>
+
+            <!-- App download -->
+            <div class="app-download">
+                <a class="btn" href="https://play.google.com/store/apps/details?id=com.kadabra.iluminacion&pcampaignid=web_share" target="_blank" rel="noopener">Descargar app Android</a>
+                <div class="text">Pronto disponible para iOS</div>
+            </div>
         </div>
-        <div class="text">Pronto Disponible para IOS</div>
+    </section>
+
+
+    <!-- SECCIÓN 2 — PRODUCTOS / CARRUSELES -->
+    <section id="page2" class="full s2" aria-label="Productos">
+        <div class="overlay"></div>
+
+        <div class="page2-text-top">
+            Iluminación con movimiento, emoción y magia.
+        </div>
+
+        <div class="mobile-carousel-wrapper">
+            <div class="mobile-carousel-track" id="carousel-track">
+
+                <!-- LUNA -->
+                <div class="mobile-item" data-gallery="luna">
+                    <div class="mini-carousel">
+                        <img src="images/luna_1.jpg" class="active" alt="Luna 1">
+                        <img src="images/luna_2.gif" alt="Luna animado">
+                        <img src="images/luna_3.gif" alt="Luna animado">
+                        <img src="images/luna_4.jpg" alt="Luna 4">
+                        <img src="images/luna_5.jpg" alt="Luna 5">
+                        <img src="images/luna_6.jpg" alt="Luna 6">
+                        <img src="images/luna_7.jpg" alt="Luna 7">
+                        <img src="images/luna_8.jpg" alt="Luna 8">
+                        <img src="images/luna_9.jpg" alt="Luna 9">
+                    </div>
+                    <div class="mobile-label">LUNA</div>
+                </div>
+
+                <!-- SOL -->
+                <div class="mobile-item" data-gallery="sol">
+                    <div class="mini-carousel">
+                        <img src="images/sol_1.jpg" class="active" alt="Sol 1">
+                        <img src="images/sol_2.gif" alt="Sol animado">
+                        <img src="images/sol_3.gif" alt="Sol animado">
+                        <img src="images/sol_4.jpg" alt="Sol 4">
+                        <img src="images/sol_5.jpg" alt="Sol 5">
+                        <img src="images/sol_6.jpg" alt="Sol 6">
+                        <img src="images/sol_7.jpg" alt="Sol 7">
+                        <img src="images/sol_8.jpg" alt="Sol 8">
+                        <img src="images/sol_9.jpg" alt="Sol 9">
+                        <img src="images/sol_10.jpg" alt="Sol 10">
+                        <img src="images/sol_11.jpg" alt="Sol 11">
+                    </div>
+                    <div class="mobile-label">SOL</div>
+                </div>
+
+                <!-- MELISSA -->
+                <div class="mobile-item melissa" data-gallery="melissa">
+                    <div class="mini-carousel">
+                        <img src="images/melissa_1.jpg" class="active" alt="Melissa">
+                    </div>
+                   
+                    <div class="mobile-label">MELISSA</div>
+                </div>
+
+                <!-- APP & GESTUAL -->
+                <div class="mobile-item" data-gallery="gestual">
+                    <div class="mini-carousel">
+                        <img src="images/gestual_1.gif" class="active" alt="Gestual 1">
+                        <img src="images/gestual_2.gif" alt="Gestual 2">
+                        <img src="images/gestual_3.jpg" alt="Gestual 3">
+                    </div>
+                    <div class="mobile-label">APP & GESTUAL</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PUNTITOS + SWIPE HINT (solo mobile, oculto en desktop por CSS) -->
+        <div class="swipe-hint"><span>← deslizá para ver más →</span></div>
+        <div class="carousel-dots" id="carousel-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div class="page2-text-bottom">
+            Creamos lámparas que no solo iluminan: se mueven,
+            reaccionan, sorprenden y generan presencia.
+            Fusionamos diseño minimalista, tecnología de
+            vanguardia, movimiento real y experiencias emocionales.
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3 — RESERVA + FORMULARIO + FAQs -->
+    <section id="page3" class="full s3" aria-label="Reserva anticipada">
+        <div class="overlay"></div>
+        <div class="container" style="width:100%;display:flex;flex-direction:column;align-items:center;padding:16px 16px 50px;">
+
+            <div class="page3-text-wrapper">
+                <div class="page3-title">Primera edición — Acceso anticipado</div>
+                <div class="page3-subtitle">Registrate y asegurá tu lugar</div>
+                <div class="page3-claim">Sé parte del comienzo</div>
+            </div>
+
+            <div id="google-doc-container">
+                <div class="reserva-card">
+                    <div class="rc-titulo">Reserva Anticipada</div>
+                    <div class="rc-desc">
+                        Reservá tu lámpara con descuento especial por primera edición y asegurá tu lugar.
+                    </div>
+                    <div class="rc-descuento">15% de descuento en esta serie</div>
+
+                    <ul class="rc-bullets">
+                        <li>Entrega a partir de Octubre</li>
+                        <li>Todos los medios de pago</li>
+                        <li>Envío GRATIS a toda la Argentina</li>
+                    </ul>
+
+                    <button class="btn-reserva-trigger" id="btn-abrir-form" onclick="abrirForm()">
+                        Reservar con $95.000
+                    </button>
+
+                    <div class="rc-precios">
+                        <span class="precio-actual">$650.000</span>
+                        <span class="precio-tachado">$765.000</span>
+                    </div>
+
+                    <!-- FORMULARIO COLAPSABLE -->
+                    <div class="form-collapse" id="form-collapse">
+                        <form action="https://formspree.io/f/mojgwvqq"
+                              method="POST"
+                              id="reserva-form"
+                              onsubmit="handleSubmit(event)">
+                            <input type="hidden" name="_subject" value="Nueva reserva K'dabra — Primera Serie">
+                            <input type="hidden" name="_next" value="">
+
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo *</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Mail *</label>
+                                <input type="email" id="email" name="email" placeholder="tu@mail.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="whatsapp">WhatsApp (con código de área) *</label>
+                                <input type="tel" id="whatsapp" name="whatsapp" placeholder="351 123 4567" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ciudad">Provincia / Ciudad de entrega *</label>
+                                <input type="text" id="ciudad" name="ciudad" placeholder="Córdoba, Buenos Aires..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Lampara">¿Qué lámpara querés? *</label>
+                                <select id="Lampara" name="Lampara" required>
+                                    <option value="">— Seleccioná —</option>
+                                    <option value="LUNA">LUNA</option>
+                                    <option value="SOL">SOL</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="origen">¿Cómo nos conociste?</label>
+                                <select id="origen" name="origen">
+                                    <option value="">— Seleccioná —</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="showroom">Mueblería / Showroom</option>
+                                    <option value="recomendacion">Recomendación</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                Confirmar reserva — $95.000 de seña →
+                            </button>
+                            <p style="font-size:12px;color:#777;text-align:center;margin-top:8px;font-family:'Arimo',sans-serif;">
+                                La seña se descuenta del precio final. Completá el formulario y a continuación podrás abonarla directo con Mercado Pago.
+                            </p>
+                        </form>
+
+                        <!-- BOTÓN MERCADO PAGO — aparece tras envío del form -->
+                        <div class="mp-btn-wrapper" id="mp-btn-wrapper">
+                            <p>
+                                ✅ <strong>¡Datos recibidos!</strong><br>
+                                El siguiente paso es pagar la seña de <strong>$95.000</strong> para confirmar tu lugar en la Primera Serie.<br>
+                                También te enviamos el link a tu mail por si preferís pagarlo después.
+                            </p>
+                            <a class="mp-btn" href="https://mpago.la/2mpAC7r" target="_blank" rel="noopener">
+                                Pagar seña con Mercado Pago →
+                            </a>
+                            <div class="mp-note">Acepta tarjetas, débito y transferencia · Pago seguro</div>
+                        </div>
+
+                        <!-- Mensaje de éxito (si no paga de inmediato) -->
+                        <div class="form-success" id="form-success">
+                            <div class="fs-icon">✅</div>
+                            <div class="fs-title">¡Casi lista tu reserva!</div>
+                            <div class="fs-desc">
+                                Recibimos tus datos. En los próximos minutos te enviamos a tu mail el link de pago de la seña ($95.000) para confirmar tu lugar en la Primera Serie.<br><br>
+                                Cualquier duda escribinos a <a href="mailto:kdabrailuminacion@gmail.com" style="color:var(--green2)">kdabrailuminacion@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQs -->
+            <div class="faqs-wrapper">
+                <div class="faqs-title">Preguntas frecuentes</div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                        ¿Ya hice la reserva, qué sigue?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Una vez que completes el formulario, podés abonar la seña ($95.000 ARS) directo con Mercado Pago. Esa seña confirma y aparta tu lugar en la Primera Serie. Antes del despacho te contactamos por WhatsApp para coordinar el saldo final y la dirección de entrega.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                        ¿Cuál es la política de devoluciones y garantía?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Todas las lámparas K'dabra tienen 6 meses de garantía por defectos de fabricación. Si el producto llega con algún daño o falla en el funcionamiento, se evaluará y se dará una solución dependiendo del caso. No nos hacemos cargo por daños ocasionados en el envío o por mala instalación. Para consultas de garantía escribinos a <a href="mailto:kdabrailuminacion@gmail.com">kdabrailuminacion@gmail.com</a>.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                        ¿K'dabra tiene suscripción?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        No. K'dabra es un producto único sin suscripciones. Nuestra app de control para las lámparas es GRATUITA y no tiene cargos mensuales ni suscripción de ningún tipo.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                        ¿Funciona para iOS y Android?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        La app K'dabra ya está disponible para Android. La versión para iOS está en desarrollo y estará disponible próximamente. El control gestual funciona de forma independiente a la app, sin necesidad de celular.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                        ¿Cómo protege K'dabra mi privacidad?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Tus datos solo se usan para gestionar tu reserva y enviarte información sobre K'dabra. No compartimos tu información con terceros. Podés leer nuestra <a href="https://kdabrailuminacion.github.io/kadabra-privacy-policy/">Política de Privacidad</a> completa.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+                        ¿Puedo comprar si no estoy en Argentina?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        En esta primera serie los envíos son a todo el territorio argentino, gratis. Para consultas de envíos internacionales escribinos a <a href="mailto:kdabrailuminacion@gmail.com">kdabrailuminacion@gmail.com</a> y lo coordinamos.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4 — QUIÉNES SOMOS (imagen de fondo) -->
+    <section id="page4" class="full s4" aria-label="Quiénes somos">
+        <div class="overlay"></div>
+        <div class="container"></div>
+    </section>
+
+    <!-- SECCIÓN 5 — STORYTELLING -->
+    <section id="page5" class="full s5" aria-label="Nuestra historia">
+        <div class="overlay" style="background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.8));"></div>
+        <div class="story-wrapper" style="position:relative;z-index:2;">
+
+            <div class="story-eyebrow">K'DABRA</div>
+
+            <h2 class="story-title">
+                Otra forma de <br><span>ILUMINAR</span>
+            </h2>
+
+            <p class="story-body">
+                K'dabra nació de una pregunta simple:<br>
+                ¿Cómo hacer nuestros espacios más mágicos?<br><br>
+                Creemos que la iluminación de un espacio bien pensado tiene que responder a quien lo vive.
+                Nuestras lámparas realzan y reviven tus ambientes desde el diseño,
+                con movimientos orgánicos y sincronizados controlados con tu gesto o desde la app K'dabra —
+                de forma simple, divertida y sin renunciar al diseño.
+                La luz acompaña tus emociones y se adapta a cómo vivís tus espacios.
+            </p>
+
+            <div class="story-pillars">
+                <div class="story-pillar">
+                    <div class="sp-icon">✦</div>
+                    <div class="sp-title">DISEÑO ANTES QUE NADA</div>
+                    <div class="sp-desc">Una luz inteligente que se adapta a tus espacios y emociones.</div>
+                </div>
+                <div class="story-pillar">
+                    <div class="sp-icon">◎</div>
+                    <div class="sp-title">TECNOLOGÍA INVISIBLE</div>
+                    <div class="sp-desc">Gestual, intuitiva, de vanguardia. La tecnología no se percibe, pero se siente.</div>
+                </div>
+                <div class="story-pillar">
+                    <div class="sp-icon">⬡</div>
+                    <div class="sp-title">EDICIÓN CON PROPÓSITO</div>
+                    <div class="sp-desc">Primera edición de 100 unidades. Reservá la tuya y aprovechá los descuentos y el envío gratis a todo el país.</div>
+                </div>
+                <div class="story-pillar">
+                    <div class="sp-icon">✿</div>
+                    <div class="sp-title">CÓRDOBA, ARGENTINA</div>
+                    <div class="sp-desc">Diseño y desarrollo propio, desde acá.</div>
+                </div>
+            </div>
+
+            <div class="story-quote">
+                ÚNICOS EN EL MUNDO.<br>Tecnología de vanguardia.<br>Diseño sobre todo.
+            </div>
+
+            <p class="story-body" style="font-size:clamp(14px,1.6vw,16px);opacity:.8;">
+                La Primera Serie es nuestra forma de demostrar que esto es real.<br>
+                100 lámparas. 100 personas que van a tener algo que nadie más tiene.<br>
+                Si llegaste hasta acá, ya sabés si esto es para vos.
+            </p>
+
+            <a href="#page3" class="story-cta">Quiero la mía →</a>
+        </div>
+    </section>
+
+</div><!-- /page-wrap -->
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">K'dabra</div>
+        <div class="footer-links">
+            <a href="mailto:kdabrailuminacion@gmail.com">kdabrailuminacion@gmail.com</a>
+            <a href="https://www.instagram.com/kdabrailuminacion/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://play.google.com/store/apps/details?id=com.kadabra.iluminacion" target="_blank" rel="noopener">App Android</a>
+            <a href="https://kdabrailuminacion.github.io/kadabra-privacy-policy/">Políticas de privacidad</a>
+        </div>
+        <div class="footer-copy">© 2025 K'dabra · Córdoba, Argentina · Todos los derechos reservados</div>
     </div>
+</footer>
 
-    <!-- Pages wrapper -->
-    <div class="page-wrap">
+<!-- LIGHTBOX -->
+<div id="lightbox" class="hidden">
+    <div class="lightbox-close" onclick="document.getElementById('lightbox').classList.add('hidden')">×</div>
+    <img id="lightbox-img" src="" alt="">
+</div>
 
-        <!-- SECTION 1 (hero) -->
-        <section id="page1" class="full s1" aria="Portada">
-            <div class="overlay"></div>
-            <div class="container">
-                <!-- Texto principal ya integrado en la imagen; incluimos CTA accesible -->
-                <div style="max-width:720px; margin-left:6%; text-align:left;">
+<script>
+    /* ---------- AUTO ROTACIÓN MINI CARRUSELES ---------- */
+    document.querySelectorAll('.mini-carousel').forEach(carousel => {
+        const imgs = carousel.querySelectorAll('img');
+        let i = 0;
+        setInterval(() => {
+            if (!document.getElementById('lightbox').classList.contains('hidden')) return;
+            imgs[i].classList.remove('active');
+            i = (i + 1) % imgs.length;
+            imgs[i].classList.add('active');
+        }, 2500);
+    });
 
-                    <div style="display:flex; gap:12px; margin-top:18px;">
+    /* ---------- PUNTITOS — actualizar al deslizar ---------- */
+    (function () {
+        const track = document.getElementById('carousel-track');
+        const dots  = document.querySelectorAll('#carousel-dots .dot');
+        if (!track || !dots.length) return;
 
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2 (productos) -->
-        <section id="page2" class="full s2" aria-label="Productos">
-            <div class="overlay"></div>
-            <div class="container">
-                <!-- Título visible (aunque el diseño está en la imagen) -->
-                <!-- modelos row (los recuadros que me diste) -->
-                <div class="models-row">
-                    <!-- LUNA carousel -->
-                    <div class="model-slot" id="slot-luna">
-                        <div class="carousel" data-auto="true" data-interval="6000">
-                            <div class="slides">
-                                <!-- Reemplazar estas imágenes por tus assets (primero imagen estática, luego gif, luego más jpgs) -->
-                                <img src="images/luna_1.jpg" class="active" alt="Luna 1">
-                                <img src="images/luna_2.gif" alt="Luna animada">
-                                <img src="images/luna_3.gif" alt="Luna animada">
-                                <img src="images/luna_4.jpg" alt="Luna 4">
-                                <img src="images/luna_5.jpg" alt="Luna 5">
-                                <img src="images/luna_6.jpg" alt="Luna 6">
-                                <img src="images/luna_7.jpg" alt="Luna 7">
-                                <img src="images/luna_8.jpg" alt="Luna 8">
-                                <img src="images/luna_9.jpg" alt="Luna 9">
-                            </div>
-                            <div class="dots"></div>
-                        </div>
-                    </div>
-
-                    <!-- SOL carousel -->
-                    <div class="model-slot" id="slot-sol">
-                        <div class="carousel" data-auto="true" data-interval="6500">
-                            <div class="slides">
-                                <img src="images/sol_1.jpg" class="active" alt="Sol 1">
-                                <img src="images/sol_2.gif" alt="Sol animado">
-                                <img src="images/sol_3.gif" alt="Sol animado">
-                                <img src="images/sol_4.jpg" alt="Sol 4">
-                                <img src="images/sol_5.jpg" alt="Sol 5">
-                                <img src="images/sol_6.jpg" alt="Sol 6">
-                                <img src="images/sol_7.jpg" alt="Sol 7">
-                                <img src="images/sol_8.jpg" alt="Sol 8">
-                                <img src="images/sol_9.jpg" alt="Sol 9">
-                                <img src="images/sol_10.jpg" alt="Sol 10">
-                                <img src="images/sol_11.jpg" alt="Sol 11">
-                            </div>
-                            <div class="dots"></div>
-                        </div>
-                    </div>
-
-                    <!-- MELISSA placeholder -->
-                    <div id="slot-melissa" class="model-slot">
-
-                        <!-- Carrusel -->
-                        <div class="carousel" data-auto="true" data-interval="7000">
-                            <!-- Tus imágenes -->
-                            <div class="slides">
-                                <img src="images/melissa_1.jpg" class="active" alt="Sol 1">
-
-                            </div>
-
-                            <!-- Texto PROXIMAMENTE -->
-                            <div class="coming">PROXIMAMENTE</div>
-
-                        </div>
-                    </div>
-                </div>
-        </section>
-
-        <!-- SECTION 3 (app & gestual + formulario) -->
-        <section id="page3" class="full s3" aria-label="App y gestual">
-            <div class="overlay"></div>
-            <div class="container">
-
-                <!-- SOLO carrusel gestual en el flex -->
-                <div class="page3-inner">
-                    <div class="slot-gestual draggable" id="slot-gestual">
-                        <div class="carousel" data-auto="true" data-interval="7000" data-gallery="slot-gestual">
-                            <div class="slides">
-                                <img src="images/gestual_1.gif" class="active">
-                                <img src="images/gestual_2.gif">
-                                <img src="images/gestual_3.jpg" alt="gestual 3">
-                            </div>
-                            <div class="dots"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FORMULARIO FUERA DEL FLEX -->
-                <div id="google-doc-container" class="draggable">
-                    <div class="slot-form" id="slot-form">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdKzm6vuRIVh3XjKB7LHHP4oJjRDl56FYncTK54Lu0sEjA8pA/viewform?embedded=true"></iframe>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- SECTION 4 (quienes somos - storytelling) -->
-        <section id="page4" class="full s4" aria-label="Quiénes somos">
-            <div class="overlay"></div>
-            <div class="container">
-                <!-- Todo el contenido textual ya está en la imagen; solo dejamos ancla -->
-            </div>
-        </section>
-
-    </div> <!-- /page-wrap -->
-    <!-- SCRIPTS: carrusel genérico -->
-
-    <script>
-        /* Carrusel unificado: auto-advance, hover start/stop, click para next, y dots */
-        (function () {
-            document.querySelectorAll('.carousel').forEach(root => {
-                const slides = Array.from(root.querySelectorAll('.slides > img, .slides > video'));
-                if (!slides.length) return;
-
-                const dotsWrap = root.querySelector('.dots');
-                let idx = slides.findIndex(s => s.classList.contains('active'));
-                if (idx < 0) idx = 0;
-
-                // crear dots si no existen
-                if (dotsWrap && dotsWrap.children.length === 0) {
-                    slides.forEach((s, i) => {
-                        const dot = document.createElement('span');
-                        dot.className = 'dot' + (i === idx ? ' active' : '');
-                        dot.addEventListener('click', (ev) => { show(i); stopAuto(); });
-                        dotsWrap.appendChild(dot);
-                    });
-                }
-                const dots = dotsWrap ? Array.from(dotsWrap.children) : [];
-
-                function show(i) {
-                    slides.forEach((s, ii) => s.classList.toggle('active', ii === i));
-                    dots.forEach((d, ii) => d.classList.toggle('active', ii === i));
-                    idx = i;
-                }
-
-                // siguiente
-                function next() {
-                    idx = (idx + 1) % slides.length;
-                    show(idx);
-                }
-
-                // click en el carousel avanza
-                root.addEventListener('click', (e) => {
-                    // evitar que clicks en controles internos (si hubiera) interfieran
-                    const tag = e.target.tagName.toLowerCase();
-                    if (tag === 'a' || tag === 'button' || e.target.classList.contains('dot')) return;
-                    next();
-                    stopAuto();
-                });
-
-                // auto
-                let autoTimer = null;
-                const auto = root.dataset.auto === 'true';
-                const interval = parseInt(root.dataset.interval || 2500, 10);
-                function startAuto() {
-                    if (!auto) return;
-                    stopAuto();
-                    autoTimer = setInterval(next, interval);
-                }
-                function stopAuto() {
-                    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
-                }
-
-
-
-                // mostrar inicial
-                show(idx);
-
-                // arrancar autoadvance si corresponde
-                if (auto) startAuto();
+        track.addEventListener('scroll', () => {
+            const items = track.querySelectorAll('.mobile-item');
+            const trackLeft = track.scrollLeft;
+            let activeIdx = 0;
+            let minDist = Infinity;
+            items.forEach((item, idx) => {
+                const dist = Math.abs(item.offsetLeft - trackLeft - track.offsetWidth * 0.125);
+                if (dist < minDist) { minDist = dist; activeIdx = idx; }
             });
-        })();
-    </script>
+            dots.forEach((d, idx) => d.classList.toggle('active', idx === activeIdx));
+        }, { passive: true });
+    })();
 
-    <script>
-        /* Mostrar/ocultar los botones fijos según si la sección .s1 está en pantalla.
-           No modifica funciones existentes. Usa IntersectionObserver. */
+    /* ---------- TAP / CLICK → LIGHTBOX ---------- */
+    function abrirLightboxDesde(item) {
+        const imgs = item.querySelectorAll('img');
+        if (!imgs.length) return;
+        let idx = 0;
+        const lb    = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        lbImg.src = imgs[idx].src;
+        lb.classList.remove('hidden');
+        lbImg.onclick = ev => {
+            ev.stopPropagation();
+            idx = (idx + 1) % imgs.length;
+            lbImg.src = imgs[idx].src;
+        };
+    }
 
-        (function () {
-            const leftButtons = document.querySelector('.left-buttons');
-            const appDownload = document.querySelector('.app-download');
-            const target = document.querySelector('.s1');
+    document.querySelectorAll('.mobile-item').forEach(item => {
+        let startX = 0, moved = false, fueToque = false;
 
-            if (!leftButtons || !appDownload || !target) return; // seguridad
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio > 0.45) {
-                        leftButtons.classList.add('visible');
-                        appDownload.classList.add('visible');
-                    } else {
-                        leftButtons.classList.remove('visible');
-                        appDownload.classList.remove('visible');
-                    }
-                });
-            }, {
-                root: null,
-                threshold: [0.0, 0.25, 0.45, 0.75, 1.0]
-            });
-
-            observer.observe(target);
-
-            // adicional: si la página carga con hash a otra sección, ocultamos hasta volver a .s1
-            window.addEventListener('hashchange', () => {
-                // esto lo maneja el observer, no hace falta más
-            }, false);
-        })();
-    </script>
-    <script>
-        /* Forzar smooth scroll real sin interferencias */
-        document.querySelectorAll('.left-buttons a').forEach(a => {
-            a.addEventListener('click', (e) => {
-                const targetID = a.getAttribute('href');
-                if (!targetID.startsWith('#')) return;
-
-                e.preventDefault();
-                const el = document.querySelector(targetID);
-                if (!el) return;
-
-                el.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            });
+        // Mobile / touch
+        item.addEventListener('touchstart', e => { startX = e.touches[0].clientX; moved = false; fueToque = true; });
+        item.addEventListener('touchmove',  e => { if (Math.abs(e.touches[0].clientX - startX) > 10) moved = true; });
+        item.addEventListener('touchend',   e => {
+            if (moved) return;
+            abrirLightboxDesde(item);
         });
-    </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        // Desktop / mouse — evita abrir dos veces en dispositivos táctiles
+        item.addEventListener('click', () => {
+            if (fueToque) { fueToque = false; return; }
+            abrirLightboxDesde(item);
+        });
+    });
 
-            const lightbox = document.getElementById("lightbox");
-            const lightboxImg = document.getElementById("lightbox-img");
-            const closeBtn = document.querySelector(".lightbox-close");
+    // Cerrar tocando/haciendo click afuera de la imagen
+    document.getElementById('lightbox').addEventListener('click', () => {
+        document.getElementById('lightbox').classList.add('hidden');
+    });
 
-            let currentCarousel = null;
-            let currentIndex = 0;
-
-            // Al hacer clic en cualquier carrusel → se abre el visor
-            document.querySelectorAll(".carousel").forEach(carousel => {
-                carousel.addEventListener("click", () => {
-                    const slides = carousel.querySelectorAll("img");
-                    if (!slides.length) return;
-
-                    currentCarousel = slides;
-                    currentIndex = [...slides].findIndex(img => img.classList.contains("active"));
-                    if (currentIndex < 0) currentIndex = 0;
-
-                    openLightbox(slides[currentIndex].src);
-                });
+    /* ---------- BOTONES VISIBLES SOLO EN PAGE1 ---------- */
+    (function () {
+        const leftButtons = document.querySelector('.left-buttons');
+        const appDownload = document.querySelector('.app-download');
+        const page1 = document.getElementById('page1');
+        if (!leftButtons || !appDownload || !page1) return;
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.45) {
+                    leftButtons.classList.add('visible');
+                    appDownload.classList.add('visible');
+                } else {
+                    leftButtons.classList.remove('visible');
+                    appDownload.classList.remove('visible');
+                }
             });
+        }, { threshold: [0.45] });
+        observer.observe(page1);
+    })();
 
-            function openLightbox(src) {
-                lightboxImg.src = src;
-                lightbox.classList.remove("hidden");
+    /* ---------- MELISSA "PRÓXIMAMENTE" ---------- */
+    document.addEventListener('DOMContentLoaded', () => {
+        const coming = document.querySelector('.coming-mobile');
+        if (!coming) return;
+        setTimeout(() => coming.classList.add('visible'), 4000);
+    });
+
+    /* ---------- FORMULARIO: abrir/cerrar ---------- */
+    function abrirForm() {
+        const collapse = document.getElementById('form-collapse');
+        const btn = document.getElementById('btn-abrir-form');
+        collapse.classList.toggle('open');
+        if (collapse.classList.contains('open')) {
+            btn.textContent = 'Cerrar formulario ↑';
+            collapse.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            btn.textContent = 'Reservar con $95.000';
+        }
+    }
+
+    /* ---------- FORMULARIO: envío → mostrar botón MP ---------- */
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const form    = document.getElementById('reserva-form');
+        const mpBtn   = document.getElementById('mp-btn-wrapper');
+        const success = document.getElementById('form-success');
+        const btn     = form.querySelector('button[type="submit"]');
+
+        btn.textContent = 'Enviando...';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                form.style.display = 'none';
+                mpBtn.classList.add('visible');   // ← muestra botón Mercado Pago
+                mpBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                btn.textContent = 'Error — intentá de nuevo';
+                btn.disabled = false;
             }
+        } catch {
+            btn.textContent = 'Error de conexión — intentá de nuevo';
+            btn.disabled = false;
+        }
+    }
 
-            function closeLightbox() {
-                lightbox.classList.add("hidden");
-            }
-
-            // Click sobre la imagen → siguiente imagen
-            lightboxImg.addEventListener("click", () => {
-                if (!currentCarousel) return;
-                currentIndex = (currentIndex + 1) % currentCarousel.length;
-                lightboxImg.src = currentCarousel[currentIndex].src;
-            });
-
-            // Botón de cierre
-            closeBtn.addEventListener("click", closeLightbox);
-
-            // Click fuera de la imagen → cerrar
-            lightbox.addEventListener("click", (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
-
+    /* ---------- FAQs acordeón ---------- */
+    function toggleFaq(btn) {
+        const answer = btn.nextElementSibling;
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.setAttribute('aria-expanded', 'false');
+            q.nextElementSibling.classList.remove('open');
         });
-    </script>
-
-    <!-- lightbox: abrir imagenes con click -->
-    <div id="lightbox" class="hidden">
-        <div class="lightbox-close">×</div>
-        <img id="lightbox-img" src="">
-    </div>
-
-    <!-- mover manualmente el fomulario -->
-    <script>
-        document.querySelectorAll('.draggable').forEach(el => {
-            let isDown = false, offsetX = 0, offsetY = 0;
-
-            el.addEventListener('mousedown', e => {
-                isDown = true;
-                offsetX = e.clientX - el.offsetLeft;
-                offsetY = e.clientY - el.offsetTop;
-            });
-
-            document.addEventListener('mouseup', () => isDown = false);
-
-            document.addEventListener('mousemove', e => {
-                if (!isDown) return;
-                el.style.left = (e.clientX - offsetX) + 'px';
-                el.style.top = (e.clientY - offsetY) + 'px';
-            });
-        });
-    </script>
-
-    
-    
+        if (!isOpen) {
+            btn.setAttribute('aria-expanded', 'true');
+            answer.classList.add('open');
+        }
+    }
+</script>
 
 </body>
 </html>
-
-
