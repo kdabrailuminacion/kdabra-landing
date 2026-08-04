@@ -87,7 +87,7 @@
         }
         .hero-title { font-family: 'Cinzel', serif; font-weight: 600; margin: 0 0 6px; color: #FF4D00; font-size: 36px; }
         .hero-subtitle { font-family: 'Poppins', sans-serif; font-weight: 400; margin: 0 0 10px; color: #000; line-height: 1.4; font-size: 16px; }
-        .hero-cta-block { background: rgba(255,255,255,.72); border-radius: 12px; padding: 10px 10px; margin-top: 6px; }
+        .hero-cta-block { background: rgba(255,255,255,.72); border-radius: 12px; padding: 10px 14px; margin-top: 6px; }
         .hero-cta-series { font-family: 'Poppins', sans-serif; font-weight: 600; color: #000; font-size: 15px; }
         .hero-cta-price { font-family: 'Arimo', sans-serif; font-weight: 700; color: var(--green2); margin: 2px 0; font-size: 23px; }
         .hero-cta-shipping { font-family: 'Arimo', sans-serif; color: #000; font-size: 14px; }
@@ -211,7 +211,7 @@
             .left-buttons {
                 font-family: 'Arimo', sans-serif;
                 position: absolute; z-index: 9999;
-                top: 62%; left: 0%;
+                top: 65%; left: 4%;
                 transform: translateY(-50%);
                 display: flex; flex-direction: column; gap: 8px;
                 opacity: 0; pointer-events: none;
@@ -221,7 +221,7 @@
             .left-buttons a {
                 display: block; text-align: center; line-height: 1;
                 font-size: 15px; font-weight: 700;
-                padding: 11px 11px;
+                padding: 11px 18px;
                 background: #FF9F1C; color: #000;
                 text-decoration: none; border-radius: 8px;
                 transition: background .18s, transform .1s;
@@ -231,21 +231,21 @@
             .app-download {
                 font-family: 'Arimo', sans-serif;
                 position: absolute; z-index: 9999;
-                bottom: 5%; left: 0%;
+                bottom: 6%; left: 4%;
                 opacity: 0; pointer-events: none;
                 transition: opacity .22s ease;
             }
             .app-download.visible { opacity: 1; pointer-events: auto; }
             .app-download .btn {
                 display: inline-block; font-size: 15px; font-weight: 700;
-                padding: 11px 22px; border-radius: 8px; color: #000;
+                padding: 11px 18px; border-radius: 8px; color: #000;
                 background: linear-gradient(30deg, #FF4D00, #FF9F1C);
                 text-decoration: none; transition: filter .18s, transform .1s;
             }
             .app-download .btn:hover { filter: brightness(.9); transform: translateY(-2px); }
             .app-download .text {
-                font-size: 22px; color: #FF4D00;
-                text-shadow: 0 0 16px #FF9F1C;
+                font-size: 20px; color: #FF4D00;
+                text-shadow: 0 0 18px #FF9F1C;
                 margin-top: 5px; text-align: center;
             }
 
@@ -355,7 +355,7 @@
             .app-download {
                 font-family: 'Arimo', sans-serif;
                 position: fixed; z-index: 9999;
-                top: 73%; left: 50%; transform: translateX(-50%);
+                top: 80%; left: 50%; transform: translateX(-50%);
                 text-align: center; opacity: 0; pointer-events: none;
                 transition: opacity .22s ease; width: 72%;
             }
@@ -366,7 +366,7 @@
                 background: linear-gradient(30deg, #FF9F1C, #FF4D00);
                 text-decoration: none;
             }
-            .app-download .text { font-size: 14px; color: #0B0B12; text-shadow: 0 0 12px #0B0B12; margin-top: 5px; }
+            .app-download .text { font-size: 14px; color: #FF9F1C; text-shadow: 0 0 13px #FF4D00; margin-top: 5px; }
 
             #page2 { display: block; min-height: 100vh; padding-top: 50px; }
             .page2-text-top { width: 100%; text-align: center; font-family: 'Poppins', sans-serif; font-size: 20px; color: #000; padding: 0 16px; }
@@ -471,7 +471,7 @@
         .story-pillar .sp-icon { font-size: 28px; margin-bottom: 8px; }
         .story-pillar .sp-title { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; color: var(--green); margin-bottom: 6px; }
         .story-pillar .sp-desc { font-family: 'Arimo', sans-serif; font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.5; }
-        .story-quote { font-family: 'Cinzel', serif; font-size: clamp(16px, 2.2vw, 22px); color: var(--green); font-style: italic; margin: 30px auto; max-width: 580px; line-height: 1.5; position: relative; padding: 0 20px; }
+        .story-quote { font-family: 'Cinzel', serif; font-size: clamp(20px, 2.2vw, 22px); color: var(--green); font-style: italic; margin: 30px auto; max-width: 580px; line-height: 1.5; position: relative; padding: 0 20px; }
         .story-quote::before { content: '"'; font-size: 60px; opacity: .2; position: absolute; top: -20px; left: 0; }
         .story-cta { display: inline-block; margin-top: 10px; padding: 14px 36px; background: var(--green); color: #000; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; border-radius: 10px; text-decoration: none; transition: background .18s, transform .1s; }
         .story-cta:hover { background: var(--green2); color: #fff; transform: translateY(-2px); }
@@ -503,7 +503,7 @@
                     control gestual y app propia.
                 </div>
                 <div class="hero-cta-block">
-                    <div class="hero-cta-series">Primera serie · 100 unidades</div>
+                    <div class="hero-cta-series">Primera serie · 50 unidades</div>
                     <div class="hero-cta-price">$650.000</div>
                     <div class="hero-cta-shipping">✈ Envío gratuito a toda la Argentina para las primeras reservas</div>
                 </div>
@@ -630,7 +630,7 @@
                     <div class="rc-descuento">15% de descuento en esta serie</div>
 
                     <ul class="rc-bullets">
-                        <li>Entrega a partir de Octubre</li>
+                        <li>Entrega a partir de 20 a 25 dias desde el impacto de la reserva</li>
                         <li>Todos los medios de pago</li>
                         <li>Envío GRATIS a toda la Argentina</li>
                     </ul>
@@ -689,10 +689,10 @@
                             </div>
 
                             <button type="submit" class="btn-submit">
-                                Confirmar reserva — $95.000 de seña →
+                                Confirmar reserva — $95.000  →
                             </button>
                             <p style="font-size:12px;color:#777;text-align:center;margin-top:8px;font-family:'Arimo',sans-serif;">
-                                La seña se descuenta del precio final. Completá el formulario y a continuación podrás abonarla directo con Mercado Pago.
+                                La reserva se descuenta del precio final. Completá el formulario y a continuación podrás abonarla directo con Mercado Pago.
                             </p>
                         </form>
 
@@ -700,11 +700,11 @@
                         <div class="mp-btn-wrapper" id="mp-btn-wrapper">
                             <p>
                                 ✅ <strong>¡Datos recibidos!</strong><br>
-                                El siguiente paso es pagar la seña de <strong>$95.000</strong> para confirmar tu lugar en la Primera Serie.<br>
+                                El siguiente paso es pagar la reserva de <strong>$95.000</strong> para confirmar tu lugar en la Primera Serie.<br>
                                 También te enviamos el link a tu mail por si preferís pagarlo después.
                             </p>
                             <a class="mp-btn" href="https://mpago.la/2mpAC7r" target="_blank" rel="noopener">
-                                Pagar seña con Mercado Pago →
+                                Pagar reserva con Mercado Pago →
                             </a>
                             <div class="mp-note">Acepta tarjetas, débito y transferencia · Pago seguro</div>
                         </div>
@@ -714,8 +714,8 @@
                             <div class="fs-icon">✅</div>
                             <div class="fs-title">¡Casi lista tu reserva!</div>
                             <div class="fs-desc">
-                                Recibimos tus datos. En los próximos minutos te enviamos a tu mail el link de pago de la seña ($95.000) para confirmar tu lugar en la Primera Serie.<br><br>
-                                Cualquier duda escribinos a <a href="mailto:kdabrailuminacion@gmail.com" style="color:var(--green2)">kdabrailuminacion@gmail.com</a>
+                                Recibimos tus datos. En los próximos minutos te enviamos a tu mail el link de pago de la reserva ($95.000) para confirmar tu lugar en la Primera Serie.<br><br>
+                                Cualquier duda escribinos a <a href="mailto:kdabrailuminacion@gmail.com" style="color:var(--green2)">kdabrailuminacion@gmail.com</a>, asunto RESERVA.
                             </div>
                         </div>
                     </div>
@@ -732,7 +732,7 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        Una vez que completes el formulario, podés abonar la seña ($95.000 ARS) directo con Mercado Pago. Esa seña confirma y aparta tu lugar en la Primera Serie. Antes del despacho te contactamos por WhatsApp para coordinar el saldo final y la dirección de entrega.
+                        Una vez que completes el formulario, podés abonar la reserva ($95.000 ARS) directo con Mercado Pago. Esa reserva confirma y aparta tu lugar en la Primera Serie. Antes del despacho te contactamos por WhatsApp para coordinar el saldo final y la dirección de entrega. TIEMPO DE ENTREGA 20 A 25 DIAS.
                     </div>
                 </div>
 
@@ -742,7 +742,7 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        Todas las lámparas K'dabra tienen 6 meses de garantía por defectos de fabricación. Si el producto llega con algún daño o falla en el funcionamiento, se evaluará y se dará una solución dependiendo del caso. No nos hacemos cargo por daños ocasionados en el envío o por mala instalación. Para consultas de garantía escribinos a <a href="mailto:kdabrailuminacion@gmail.com">kdabrailuminacion@gmail.com</a>.
+                        Todas las lámparas K'dabra tienen 6 meses de garantía por defectos de fabricación. Si el producto llega con algún daño o falla en el funcionamiento, se evaluará y se dará una solución dependiendo del caso. No nos hacemos cargo por daños ocasionados en el envío o por mala instalación. Para consultas de garantía escribinos a <a href="mailto:kdabrailuminacion@gmail.com">kdabrailuminacion@gmail.com</a>. Asunto GARANTÍA.
                     </div>
                 </div>
 
@@ -830,7 +830,7 @@
                 <div class="story-pillar">
                     <div class="sp-icon">⬡</div>
                     <div class="sp-title">EDICIÓN CON PROPÓSITO</div>
-                    <div class="sp-desc">Primera edición de 100 unidades. Reservá la tuya y aprovechá los descuentos y el envío gratis a todo el país.</div>
+                    <div class="sp-desc">Primera edición de 50 unidades. Reservá la tuya y aprovechá los descuentos y el envío gratis a todo el país.</div>
                 </div>
                 <div class="story-pillar">
                     <div class="sp-icon">✿</div>
@@ -845,7 +845,7 @@
 
             <p class="story-body" style="font-size:clamp(14px,1.6vw,16px);opacity:.8;">
                 La Primera Serie es nuestra forma de demostrar que esto es real.<br>
-                100 lámparas. 100 personas que van a tener algo que nadie más tiene.<br>
+                500 lámparas. 50 personas que van a tener algo que nadie más tiene.<br>
                 Si llegaste hasta acá, ya sabés si esto es para vos.
             </p>
 
