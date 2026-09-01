@@ -87,7 +87,7 @@
         }
         .hero-title { font-family: 'Cinzel', serif; font-weight: 600; margin: 0 0 6px; color: #FF4D00; font-size: 36px; }
         .hero-subtitle { font-family: 'Poppins', sans-serif; font-weight: 400; margin: 0 0 10px; color: #000; line-height: 1.4; font-size: 16px; }
-        .hero-cta-block { background: rgba(255,255,255,.72); border-radius: 12px; padding: 10px 14px; margin-top: 6px; }
+        .hero-cta-block { background: rgba(255,255,255,.95); border-radius: 12px; padding: 10px 14px; margin-top: 6px; }
         .hero-cta-series { font-family: 'Poppins', sans-serif; font-weight: 600; color: #000; font-size: 15px; }
         .hero-cta-price { font-family: 'Arimo', sans-serif; font-weight: 700; color: var(--green2); margin: 2px 0; font-size: 23px; }
         .hero-cta-shipping { font-family: 'Arimo', sans-serif; color: #000; font-size: 14px; }
@@ -211,7 +211,7 @@
             .left-buttons {
                 font-family: 'Arimo', sans-serif;
                 position: absolute; z-index: 9999;
-                top: 60%; left: 1%;
+                top: 65%; left: 4%;
                 transform: translateY(-50%);
                 display: flex; flex-direction: column; gap: 8px;
                 opacity: 0; pointer-events: none;
@@ -221,7 +221,7 @@
             .left-buttons a {
                 display: block; text-align: center; line-height: 1;
                 font-size: 15px; font-weight: 700;
-                padding: 11px 12px;
+                padding: 11px 18px;
                 background: #FF9F1C; color: #000;
                 text-decoration: none; border-radius: 8px;
                 transition: background .18s, transform .1s;
@@ -231,14 +231,14 @@
             .app-download {
                 font-family: 'Arimo', sans-serif;
                 position: absolute; z-index: 9999;
-                bottom: 6%; left: 1%;
+                bottom: 6%; left: 4%;
                 opacity: 0; pointer-events: none;
                 transition: opacity .22s ease;
             }
             .app-download.visible { opacity: 1; pointer-events: auto; }
             .app-download .btn {
                 display: inline-block; font-size: 15px; font-weight: 700;
-                padding: 11px 16px; border-radius: 8px; color: #000;
+                padding: 11px 18px; border-radius: 8px; color: #000;
                 background: linear-gradient(30deg, #FF4D00, #FF9F1C);
                 text-decoration: none; transition: filter .18s, transform .1s;
             }
@@ -269,34 +269,43 @@
                 color: var(--green); text-align: center;
                 max-width: 700px; margin-top: 20px; line-height: 1.6;
             }
+            /* Grilla 3 columnas: fila 1 = Luna (120/80/petit),
+               fila 2 = Sol (120/80/petit), fila 3 = App&Gestual centrado
+               en la columna del medio. */
             .mobile-carousel-wrapper {
-                display: flex; gap: 16px; justify-content: center;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
                 width: 100%; max-width: 1100px;
             }
             .mobile-item {
-                flex: 1; max-width: 240px;
+                width: 100%;
+                max-width: 240px;
+                margin: 0 auto;
                 aspect-ratio: 9 / 16; position: relative;
                 border-radius: 12px; overflow: hidden;
+            }
+            .mobile-item.app-gestual-item {
+                grid-column: 2 / 3;
             }
             .mini-carousel { width: 100%; height: 100%; border-radius: 10px; overflow: hidden; position: relative; }
             .mini-carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s ease; }
             .mini-carousel img.active { opacity: 1; }
             .mobile-label {
-                font-size: 28px; font-weight: 700;
+                font-size: 22px; font-weight: 700;
                 position: absolute; bottom: 14px; left: 50%;
                 transform: translateX(-50%); color: #fff;
                 letter-spacing: 1px; text-shadow: 0 0 20px rgba(0,0,0,.9);
-                pointer-events: none; white-space: nowrap;
+                pointer-events: none; text-align: center; width: 100%;
             }
-            .coming-mobile {
-                position: absolute; top: 50%; left: 50%;
-                transform: translate(-50%,-50%);
-                color: #FF4D00; font-size: 22px; font-weight: 900;
-                text-shadow: 0 0 20px #FF9F1C;
-                opacity: 0; pointer-events: none;
-                transition: opacity .4s ease; z-index: 5;
+            .mobile-size {
+                display: block; font-size: 14px; font-weight: 500;
+                margin-top: 2px; letter-spacing: 0;
             }
-            .coming-mobile.visible { opacity: 1; }
+            .mobile-price {
+                display: block; font-size: 17px; font-weight: 700;
+                margin-top: 2px; letter-spacing: 0; color: #FF9F1C;
+            }
             .mobile-carousel-track { display: contents; }
 
             /* Ocultar puntitos y swipe en desktop (no aplica) */
@@ -338,7 +347,7 @@
             .left-buttons {
                 font-family: 'Arimo', sans-serif;
                 position: fixed; z-index: 9999;
-                top: 54%; left: 50%; transform: translateX(-50%);
+                top: 53%; left: 50%; transform: translateX(-50%);
                 display: flex; flex-direction: column; gap: 6px;
                 opacity: 0; pointer-events: none;
                 transition: opacity .22s ease; width: 72%;
@@ -355,7 +364,7 @@
             .app-download {
                 font-family: 'Arimo', sans-serif;
                 position: fixed; z-index: 9999;
-                top: 82%; left: 50%; transform: translateX(-50%);
+                top: 80%; left: 50%; transform: translateX(-50%);
                 text-align: center; opacity: 0; pointer-events: none;
                 transition: opacity .22s ease; width: 72%;
             }
@@ -366,11 +375,11 @@
                 background: linear-gradient(30deg, #FF9F1C, #FF4D00);
                 text-decoration: none;
             }
-            .app-download .text { font-size: 17px; color: #FF9F1C; text-shadow: 0 0 13px #FF4D00; margin-top: 5px; }
+            .app-download .text { font-size: 14px; color: #FF9F1C; text-shadow: 0 0 13px #FF4D00; margin-top: 5px; }
 
             #page2 { display: block; min-height: 100vh; padding-top: 50px; }
-            .page2-text-top { width: 100%; text-align: center; font-family: 'Poppins', sans-serif; font-size: 22px; color: #000; padding: 0 16px; }
-            .page2-text-bottom { width: 100%; text-align: center; font-family: 'Arimo', sans-serif; font-size: 18px; color: #000; margin-bottom: 40px; padding: 0 20px; line-height: 1.5; }
+            .page2-text-top { width: 100%; text-align: center; font-family: 'Poppins', sans-serif; font-size: 20px; color: #000; padding: 0 16px; }
+            .page2-text-bottom { width: 100%; text-align: center; font-family: 'Arimo', sans-serif; font-size: 15px; color: #000; margin-bottom: 40px; padding: 0 20px; line-height: 1.5; }
 
             .mobile-carousel-wrapper { position: relative; width: 100%; height: 62vh; margin: 12px 0 4px; }
             .mobile-carousel-track {
@@ -384,9 +393,18 @@
             .mini-carousel { width: 100%; height: 100%; border-radius: 10px; overflow: hidden; position: relative; }
             .mini-carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s ease; }
             .mini-carousel img.active { opacity: 1; }
-            .mobile-label { font-size: 32px; font-weight: 700; position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: #fff; letter-spacing: 1px; text-shadow: 0 0 20px rgba(0,0,0,.9); pointer-events: none; }
-            .coming-mobile { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #FF4D00; font-size: 26px; font-weight: 900; text-shadow: 0 0 20px #FF9F1C; opacity: 0; pointer-events: none; transition: opacity .4s ease; z-index: 5; }
-            .coming-mobile.visible { opacity: 1; }
+            .mobile-label {
+                font-size: 26px; font-weight: 700; position: absolute; bottom: 18px; left: 50%;
+                transform: translateX(-50%); color: #fff; letter-spacing: 1px;
+                text-shadow: 0 0 20px rgba(0,0,0,.9); pointer-events: none;
+                text-align: center; width: 100%;
+            }
+            .mobile-size {
+                display: block; font-size: 16px; font-weight: 500; margin-top: 2px;
+            }
+            .mobile-price {
+                display: block; font-size: 20px; font-weight: 700; margin-top: 2px; color: #FF9F1C;
+            }
 
             /* PAGE 3 MOBILE — formulario arriba con poco margen */
             #page3 { display: block; min-height: 100vh; padding-top: 16px; }
@@ -504,7 +522,7 @@
                 </div>
                 <div class="hero-cta-block">
                     <div class="hero-cta-series">Primera serie · 50 unidades</div>
-                    <div class="hero-cta-price">$650.000</div>
+                    <div class="hero-cta-price">"Empezamos con 50 lámparas con beneficios exclusivos."</div>
                     <div class="hero-cta-shipping">✈ Envío gratuito a toda la Argentina para las primeras reservas</div>
                 </div>
             </div>
@@ -537,10 +555,10 @@
         <div class="mobile-carousel-wrapper">
             <div class="mobile-carousel-track" id="carousel-track">
 
-                <!-- LUNA -->
-                <div class="mobile-item" data-gallery="luna">
+                <!-- LUNA 120cm -->
+                <div class="mobile-item" data-gallery="luna-120">
                     <div class="mini-carousel">
-                        <img src="images/luna_1.jpg" class="active" alt="Luna 1">
+                        <img src="images/luna_1.jpg" class="active" alt="Luna 120cm 1">
                         <img src="images/luna_2.gif" alt="Luna animado">
                         <img src="images/luna_3.gif" alt="Luna animado">
                         <img src="images/luna_4.jpg" alt="Luna 4">
@@ -550,13 +568,45 @@
                         <img src="images/luna_8.jpg" alt="Luna 8">
                         <img src="images/luna_9.jpg" alt="Luna 9">
                     </div>
-                    <div class="mobile-label">LUNA</div>
+                    <div class="mobile-label">LUNA<span class="mobile-size">120 cm</span><span class="mobile-price">$715.000</span></div>
                 </div>
 
-                <!-- SOL -->
-                <div class="mobile-item" data-gallery="sol">
+                <!-- LUNA 80cm -->
+                <div class="mobile-item" data-gallery="luna-80">
                     <div class="mini-carousel">
-                        <img src="images/sol_1.jpg" class="active" alt="Sol 1">
+                        <img src="images/luna_1.jpg" class="active" alt="Luna 80cm 1">
+                        <img src="images/luna_2.gif" alt="Luna animado">
+                        <img src="images/luna_3.gif" alt="Luna animado">
+                        <img src="images/luna_4.jpg" alt="Luna 4">
+                        <img src="images/luna_5.jpg" alt="Luna 5">
+                        <img src="images/luna_6.jpg" alt="Luna 6">
+                        <img src="images/luna_7.jpg" alt="Luna 7">
+                        <img src="images/luna_8.jpg" alt="Luna 8">
+                        <img src="images/luna_9.jpg" alt="Luna 9">
+                    </div>
+                    <div class="mobile-label">LUNA<span class="mobile-size">80 cm</span><span class="mobile-price">$610.000</span></div>
+                </div>
+
+                <!-- LUNA PETIT 50cm -->
+                <div class="mobile-item" data-gallery="Petit luna">
+                    <div class="mini-carousel">
+                        <img src="images/luna_1.jpg" class="active" alt="Luna Petit 1">
+                        <img src="images/luna_2.gif" alt="Luna animado">
+                        <img src="images/luna_3.gif" alt="Luna animado">
+                        <img src="images/luna_4.jpg" alt="Luna 4">
+                        <img src="images/luna_5.jpg" alt="Luna 5">
+                        <img src="images/luna_6.jpg" alt="Luna 6">
+                        <img src="images/luna_7.jpg" alt="Luna 7">
+                        <img src="images/luna_8.jpg" alt="Luna 8">
+                        <img src="images/luna_9.jpg" alt="Luna 9">
+                    </div>
+                    <div class="mobile-label">PETIT LUNA<span class="mobile-size">50 cm</span><span class="mobile-price">$460.000</span></div>
+                </div>
+
+                <!-- SOL 120cm -->
+                <div class="mobile-item" data-gallery="Sol-120">
+                    <div class="mini-carousel">
+                        <img src="images/sol_1.jpg" class="active" alt="Sol 120cm 1">
                         <img src="images/sol_2.gif" alt="Sol animado">
                         <img src="images/sol_3.gif" alt="Sol animado">
                         <img src="images/sol_4.jpg" alt="Sol 4">
@@ -568,20 +618,47 @@
                         <img src="images/sol_10.jpg" alt="Sol 10">
                         <img src="images/sol_11.jpg" alt="Sol 11">
                     </div>
-                    <div class="mobile-label">SOL</div>
+                    <div class="mobile-label">SOL<span class="mobile-size">120 cm</span><span class="mobile-price">$725.000</span></div>
                 </div>
 
-                <!-- MELISSA -->
-                <div class="mobile-item melissa" data-gallery="melissa">
+                <!-- SOL 80cm -->
+                <div class="mobile-item" data-gallery="Sol-80">
                     <div class="mini-carousel">
-                        <img src="images/melissa_1.jpg" class="active" alt="Melissa">
+                        <img src="images/sol_1.jpg" class="active" alt="Sol 80cm 1">
+                        <img src="images/sol_2.gif" alt="Sol animado">
+                        <img src="images/sol_3.gif" alt="Sol animado">
+                        <img src="images/sol_4.jpg" alt="Sol 4">
+                        <img src="images/sol_5.jpg" alt="Sol 5">
+                        <img src="images/sol_6.jpg" alt="Sol 6">
+                        <img src="images/sol_7.jpg" alt="Sol 7">
+                        <img src="images/sol_8.jpg" alt="Sol 8">
+                        <img src="images/sol_9.jpg" alt="Sol 9">
+                        <img src="images/sol_10.jpg" alt="Sol 10">
+                        <img src="images/sol_11.jpg" alt="Sol 11">
                     </div>
-                   
-                    <div class="mobile-label">MELISSA</div>
+                    <div class="mobile-label">SOL<span class="mobile-size">80 cm</span><span class="mobile-price">$646.000</span></div>
+                </div>
+
+                <!-- SOL PETIT 50cm -->
+                <div class="mobile-item" data-gallery="Petit Sol">
+                    <div class="mini-carousel">
+                        <img src="images/sol_1.jpg" class="active" alt="Sol Petit 1">
+                        <img src="images/sol_2.gif" alt="Sol animado">
+                        <img src="images/sol_3.gif" alt="Sol animado">
+                        <img src="images/sol_4.jpg" alt="Sol 4">
+                        <img src="images/sol_5.jpg" alt="Sol 5">
+                        <img src="images/sol_6.jpg" alt="Sol 6">
+                        <img src="images/sol_7.jpg" alt="Sol 7">
+                        <img src="images/sol_8.jpg" alt="Sol 8">
+                        <img src="images/sol_9.jpg" alt="Sol 9">
+                        <img src="images/sol_10.jpg" alt="Sol 10">
+                        <img src="images/sol_11.jpg" alt="Sol 11">
+                    </div>
+                    <div class="mobile-label">PETIT SOL<span class="mobile-size">50 cm</span><span class="mobile-price">$475.000</span></div>
                 </div>
 
                 <!-- APP & GESTUAL -->
-                <div class="mobile-item" data-gallery="gestual">
+                <div class="mobile-item app-gestual-item" data-gallery="gestual">
                     <div class="mini-carousel">
                         <img src="images/gestual_1.gif" class="active" alt="Gestual 1">
                         <img src="images/gestual_2.gif" alt="Gestual 2">
@@ -595,12 +672,7 @@
 
         <!-- PUNTITOS + SWIPE HINT (solo mobile, oculto en desktop por CSS) -->
         <div class="swipe-hint"><span>← deslizá para ver más →</span></div>
-        <div class="carousel-dots" id="carousel-dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
 
         <div class="page2-text-bottom">
             Creamos lámparas que no solo iluminan: se mueven,
@@ -639,11 +711,6 @@
                         Reservar con $95.000
                     </button>
 
-                    <div class="rc-precios">
-                        <span class="precio-actual">$650.000</span>
-                        <span class="precio-tachado">$765.000</span>
-                    </div>
-
                     <!-- FORMULARIO COLAPSABLE -->
                     <div class="form-collapse" id="form-collapse">
                         <form action="https://formspree.io/f/mojgwvqq"
@@ -673,8 +740,12 @@
                                 <label for="Lampara">¿Qué lámpara querés? *</label>
                                 <select id="Lampara" name="Lampara" required>
                                     <option value="">— Seleccioná —</option>
-                                    <option value="LUNA">LUNA</option>
-                                    <option value="SOL">SOL</option>
+                                    <option value="LUNA 120cm - $715.000">LUNA 120cm — $715.000</option>
+                                    <option value="LUNA 80cm - $610.000">LUNA 80cm — $610.000</option>
+                                    <option value="LUNA Petit 50cm - $460.000">LUNA Petit 50cm — $460.000</option>
+                                    <option value="SOL 120cm - $725.000">SOL 120cm — $725.000</option>
+                                    <option value="SOL 80cm - $646.000">SOL 80cm — $646.000</option>
+                                    <option value="SOL Petit 50cm - $475.000">SOL Petit 50cm — $475.000</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -888,14 +959,23 @@
         }, 2500);
     });
 
-    /* ---------- PUNTITOS — actualizar al deslizar ---------- */
+    /* ---------- PUNTITOS — generar dinámicamente y actualizar al deslizar ---------- */
     (function () {
         const track = document.getElementById('carousel-track');
-        const dots  = document.querySelectorAll('#carousel-dots .dot');
-        if (!track || !dots.length) return;
+        const dotsWrap = document.getElementById('carousel-dots');
+        if (!track || !dotsWrap) return;
+
+        const items = track.querySelectorAll('.mobile-item');
+        dotsWrap.innerHTML = '';
+        items.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (idx === 0 ? ' active' : '');
+            dotsWrap.appendChild(dot);
+        });
+        const dots = dotsWrap.querySelectorAll('.dot');
+        if (!dots.length) return;
 
         track.addEventListener('scroll', () => {
-            const items = track.querySelectorAll('.mobile-item');
             const trackLeft = track.scrollLeft;
             let activeIdx = 0;
             let minDist = Infinity;
@@ -965,13 +1045,6 @@
         }, { threshold: [0.45] });
         observer.observe(page1);
     })();
-
-    /* ---------- MELISSA "PRÓXIMAMENTE" ---------- */
-    document.addEventListener('DOMContentLoaded', () => {
-        const coming = document.querySelector('.coming-mobile');
-        if (!coming) return;
-        setTimeout(() => coming.classList.add('visible'), 4000);
-    });
 
     /* ---------- FORMULARIO: abrir/cerrar ---------- */
     function abrirForm() {
